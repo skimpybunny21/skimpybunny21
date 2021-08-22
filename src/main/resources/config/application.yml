@@ -72,7 +72,7 @@ spring:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
     # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
-    active: #spring.profiles.active#
+    active: dev
     group:
       dev:
         - dev
@@ -128,13 +128,14 @@ spring:
   security:
     oauth2:
       client:
+        authorization-grant-type: client_credentials
         provider:
           oidc:
-            issuer-uri: http://localhost:9080/auth/realms/jhipster
+            issuer-uri: https://dev-58368863.okta.com/
         registration:
           oidc:
-            client-id: web_app
-            client-secret: web_app
+            client-id: 0oa1f7dl57fg7ijc15d7
+            client-secret: P2FG1fgj-fZxffwz16cqWd3r_9kK8rhlr3-qRzDO
             scope: openid,profile,email
 
 server:

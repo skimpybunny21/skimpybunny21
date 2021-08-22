@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/SkimpyBunny
-    username: SkimpyBunny
-    password:
+    url: jdbc:postgresql://skimpybusiness.cumjn4ucncdg.us-east-2.rds.amazonaws.com:5432/postgres
+    username: postgres
+    password: yasmtShkAAu8Q2AoG1e8F1RfLkK
     hikari:
       poolName: Hikari
       auto-commit: false
