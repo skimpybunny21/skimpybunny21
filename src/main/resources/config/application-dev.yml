@@ -41,12 +41,17 @@ spring:
   jpa:
     database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
   liquibase:
+    enabled: false
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
     cache: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    create-schemas: true
 
 server:
   port: 8080
