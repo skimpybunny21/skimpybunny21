@@ -50,6 +50,8 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+    create-schemas: true
+    schemas: app-db
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:

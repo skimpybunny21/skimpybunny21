@@ -603,6 +603,7 @@
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                         <driver>org.postgresql.Driver</driver>
+                        <enabled>false</enabled>
                         <url>jdbc:postgresql://localhost:5432/SkimpyBunny</url>
                         <defaultSchemaName></defaultSchemaName>
                         <username>SkimpyBunny</username>
@@ -822,7 +823,7 @@
         <profile>
             <id>no-liquibase</id>
             <properties>
-                <profile.no-liquibase>,no-liquibase</profile.no-liquibase>
+                <profile.no-liquibase>no-liquibase</profile.no-liquibase>
             </properties>
         </profile>
         <profile>
