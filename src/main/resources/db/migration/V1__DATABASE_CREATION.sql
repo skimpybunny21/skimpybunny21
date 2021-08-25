@@ -1,94 +1,68 @@
-﻿CREATE TABLE IF NOT EXISTS Users (
-    userID UUID DEFAULT uuid_generate_v4 (),
-    email varchar(100)   NOT NULL,
-    passwordHash varchar(200)   NOT NULL,
-    isPaidSubscription Boolean   NOT NULL,
-    isAdmin Boolean   NOT NULL,
-    CONSTRAINT pk_Users PRIMARY KEY (
-        userID
+﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Link to schema: https://app.quickdatabasediagrams.com/#/d/6ukfXq
+-- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
+
+
+CREATE TABLE "Transactions" (
+    "transaction_id" varchar(100)   NOT NULL,
+    "user_id" varchar(100)   NOT NULL,
+    "amount" decimal   NOT NULL,
+    "transaction_date" date   NOT NULL,
+    "is_active" Boolean   NOT NULL,
+    CONSTRAINT "pk_Transactions" PRIMARY KEY (
+        "transaction_id"
      )
 );
 
-CREATE TABLE IF NOT EXISTS  Transactions (
-    transactionID UUID  DEFAULT uuid_generate_v4 (),
-    userID UUID   NOT NULL,
-    amount decimal   NOT NULL,
-    transactionDate date   NOT NULL,
-    isActive Boolean   NOT NULL,
-    CONSTRAINT pk_Transactions PRIMARY KEY (
-        transactionID
+CREATE TABLE "APIs" (
+    "api_id" varchar(100)   NOT NULL,
+    "user_id" varchar(100)   NOT NULL,
+    "name" varchar(200)   NOT NULL,
+    "url" varchar(500)   NOT NULL,
+    "token" varchar(200)   NOT NULL,
+    CONSTRAINT "pk_APIs" PRIMARY KEY (
+        "api_id"
      )
 );
 
-CREATE TABLE IF NOT EXISTS  APIs (
-    apiID UUID  DEFAULT uuid_generate_v4 (),
-    userID UUID   NOT NULL,
-    name varchar(200)   NOT NULL,
-    url varchar(500)   NOT NULL,
-    token varchar(200)   NOT NULL,
-    CONSTRAINT pk_APIs PRIMARY KEY (
-        apiID
-     )
+CREATE TABLE "ApplicationSettings" (
+    "user_id" varchar(100)   NOT NULL,
+    "colour_scheme" varchar(200)   NOT NULL,
+    "language_name" varchar(200)   NOT NULL,
+    "currency_name" varchar(10)   NOT NULL,
+    "time_zone_name" varchar(200)   NOT NULL,
+    "theme_name" varchar(200)   NOT NULL,
+    "is_notification_active" Boolean   NOT NULL,
+    "is_active_email_raport" Boolean   NOT NULL,
+    "is_paid_subscription" Boolean   NOT NULL
 );
 
+-- CREATE TABLE "jhi_user" (
+--     "id" varchar(100)   NOT NULL,
+--     "login" varchar(50)   NOT NULL,
+--     "email" varchar(191)   NOT NULL,
+--     "first_name" (50)   NOT NULL,
+--     "last_name" (50)   NOT NULL,
+--     CONSTRAINT "pk_jhi_user" PRIMARY KEY (
+--         "id"
+--      )
+-- );
 
-CREATE TABLE IF NOT EXISTS  Currencies (
-    currencyName varchar(10)   NOT NULL,
-    CONSTRAINT pk_Currencies PRIMARY KEY (
-        currencyName
-     )
-);
+-- CREATE TABLE "jhi_user_authority" (
+--     "user_id" varchar(100)   NOT NULL,
+--     "authority_name" varchar(50)   NOT NULL
+-- );
 
-CREATE TABLE IF NOT EXISTS  TimeZones (
-    timeZoneName varchar(200)   NOT NULL,
-    CONSTRAINT pk_TimeZones PRIMARY KEY (
-        timeZoneName
-     )
-);
+ALTER TABLE "Transactions" ADD CONSTRAINT "fk_Transactions_user_id" FOREIGN KEY("user_id")
+REFERENCES "public"."jhi_user" ("id");
 
-CREATE TABLE IF NOT EXISTS  Themes (
-    themeName varchar(200)   NOT NULL,
-    CONSTRAINT pk_Themes PRIMARY KEY (
-        themeName
-     )
-);
+ALTER TABLE "APIs" ADD CONSTRAINT "fk_APIs_user_id" FOREIGN KEY("user_id")
+REFERENCES "public"."jhi_user" ("id");
 
-CREATE TABLE IF NOT EXISTS  ApplicationSettings (
-    userID UUID   NOT NULL,
-    colourScheme varchar(200)   NOT NULL,
-    languageName varchar(200)   NOT NULL,
-    currencyName varchar(10)   NOT NULL,
-    timeZoneName varchar(200)   NOT NULL,
-    themeName varchar(200)   NOT NULL,
-    isNotificationActive Boolean   NOT NULL,
-    isActiveEmailRaport Boolean   NOT NULL
-);
+ALTER TABLE "ApplicationSettings" ADD CONSTRAINT "fk_ApplicationSettings_user_id" FOREIGN KEY("user_id")
+REFERENCES "public"."jhi_user" ("id");
 
-CREATE TABLE IF NOT EXISTS  Languages (
-    languageName varchar(200)   NOT NULL,
-    CONSTRAINT pk_Languages PRIMARY KEY (
-        languageName
-     )
-);
 
-ALTER TABLE Transactions ADD CONSTRAINT fk_Transactions_userID FOREIGN KEY(userID)
-REFERENCES Users (userID);
-
-ALTER TABLE APIs ADD CONSTRAINT fk_APIs_userID FOREIGN KEY(userID)
-REFERENCES Users (userID);
-
-ALTER TABLE ApplicationSettings ADD CONSTRAINT fk_ApplicationSettings_userID FOREIGN KEY(userID)
-REFERENCES Users (userID);
-
-ALTER TABLE ApplicationSettings ADD CONSTRAINT fk_ApplicationSettings_languageName FOREIGN KEY(languageName)
-REFERENCES Languages (languageName);
-
-ALTER TABLE ApplicationSettings ADD CONSTRAINT fk_ApplicationSettings_currencyName FOREIGN KEY(currencyName)
-REFERENCES Currencies (currencyName);
-
-ALTER TABLE ApplicationSettings ADD CONSTRAINT fk_ApplicationSettings_timeZoneName FOREIGN KEY(timeZoneName)
-REFERENCES TimeZones (timeZoneName);
-
-ALTER TABLE ApplicationSettings ADD CONSTRAINT fk_ApplicationSettings_themeName FOREIGN KEY(themeName)
-REFERENCES Themes (themeName);
+-- ALTER TABLE "jhi_user_authority" ADD CONSTRAINT "fk_jhi_user_authority_user_id" FOREIGN KEY("user_id")
+-- REFERENCES "jhi_user" ("id");
 
