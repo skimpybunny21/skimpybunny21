@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "ApplicationSettings", schema = "app-db")
+@Table(name = "ApplicationSettings", schema = "app_db")
 public class ApplicationSettings {
 
     //    @Id
