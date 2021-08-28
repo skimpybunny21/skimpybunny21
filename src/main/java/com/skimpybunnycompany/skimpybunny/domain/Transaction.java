@@ -72,6 +72,8 @@ public class Transaction {
         this.contractor = contractor;
     }
 
+    public Transaction() {}
+
     public String getTransactionID() {
         return transactionID;
     }

@@ -10,15 +10,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, String> {
-    @Override
-    default List<Transaction> findAll() {
-        Transaction t1 = new Transaction("id_1", "user1", new BigDecimal(100), new Date(), true, "mieszkanie", "spoldzielnia");
-
-        Transaction t2 = new Transaction("id_2", "user1", new BigDecimal(50), new Date(), true, "zakupy", "Lidl");
-
-        List<Transaction> returnList = new ArrayList<>();
-        returnList.add(t1);
-        returnList.add(t2);
-        return returnList;
-    }
+    //    @Override
+    //    default List<Transaction> findAll() {
+    //        Transaction t1 = new Transaction("id_1", "user1", new BigDecimal(100), new Date(), true, "mieszkanie", "spoldzielnia");
+    //
+    //        Transaction t2 = new Transaction("id_2", "user1", new BigDecimal(50), new Date(), true, "zakupy", "Lidl");
+    //
+    //        List<Transaction> returnList = new ArrayList<>();
+    //        returnList.add(t1);
+    //        returnList.add(t2);
+    //        return returnList;
+    //    }
 }
