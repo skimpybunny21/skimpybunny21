@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "APIs", schema = "app_db")
+@Table(name = "apis", schema = "app_db")
 public class APIs {
 
     @Id
