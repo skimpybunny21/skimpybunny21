@@ -11,7 +11,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 @Entity
 @Table(name = "transactions", schema = "app_db")
@@ -23,9 +22,9 @@ public class Transaction {
     @Column(name = "transaction_id", nullable = false)
     private String transactionID;
 
-    @Size(max = 100)
-    @Column(name = "user_id")
-    private String userID;
+    //    @Size(max = 100)
+    //    @Column(name = "user_id")
+    //    private String userID;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -53,24 +52,24 @@ public class Transaction {
     @Column(name = "contractor")
     private String contractor;
 
-    public Transaction(
-        String transactionID,
-        String userID,
-        BigDecimal amount,
-        Date transactionDate,
-        boolean isActive,
-        String category,
-        String contractor
-    ) {
-        this.transactionID = transactionID;
-        this.userID = userID;
-        this.user = null;
-        this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.isActive = isActive;
-        this.category = category;
-        this.contractor = contractor;
-    }
+    //    public Transaction(
+    //        String transactionID,
+    //        String userID,
+    //        BigDecimal amount,
+    //        Date transactionDate,
+    //        boolean isActive,
+    //        String category,
+    //        String contractor
+    //    ) {
+    //        this.transactionID = transactionID;
+    //        this.userID = user.getId();
+    //        this.user = null;
+    //        this.amount = amount;
+    //        this.transactionDate = transactionDate;
+    //        this.isActive = isActive;
+    //        this.category = category;
+    //        this.contractor = contractor;
+    //    }
 
     public Transaction() {}
 
@@ -82,13 +81,13 @@ public class Transaction {
         this.transactionID = transactionID;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
+    //    public String getUserID() {
+    //        return userID;
+    //    }
+    //
+    //    public void setUserID(String userID) {
+    //        this.userID = userID;
+    //    }
 
     public User getUser() {
         return user;

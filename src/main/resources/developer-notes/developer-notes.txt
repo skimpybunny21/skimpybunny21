@@ -2,3 +2,4 @@ stworzyć enumy (do pól w bazie tabeli application settings:
 Languages, Currencies, TimeZones, Themes
 
 
+// TODO: Sprawdzić jak zdobyć informację kto jest aktualnie zalogowany
