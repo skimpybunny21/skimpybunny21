@@ -1,0 +1,63 @@
+{
+  "id": 338132,
+  "num_rows": 1000,
+  "file_format": "csv",
+  "name": "SkimpyBunny_Transactions_V2",
+  "include_header": true,
+  "columns": [
+    {
+      "name": "transaction_id",
+      "null_percentage": 0,
+      "type": "GUID",
+      "formula": null
+    },
+    {
+      "name": "user_id",
+      "null_percentage": 0,
+      "type": "GUID",
+      "formula": "00u1lrmybws64w6205d7"
+    },
+    {
+      "name": "amount",
+      "null_percentage": 0,
+      "type": "Number",
+      "min": 1,
+      "max": 1000,
+      "decimals": 2,
+      "formula": null
+    },
+    {
+      "name": "transaction_date",
+      "null_percentage": 0,
+      "type": "Datetime",
+      "min": "08/25/2020",
+      "max": "08/25/2021",
+      "format": "%Y-%m-%d",
+      "formula": null
+    },
+    {
+      "name": "is_active",
+      "null_percentage": 0,
+      "type": "Boolean",
+      "formula": null
+    },
+    {
+      "name": "category",
+      "null_percentage": 0,
+      "type": "Custom List",
+      "values": ["mieszkanie", "samochód", "telefon", "jedzenie", "przedszkole"],
+      "selectionStyle": "random",
+      "distribution": null,
+      "formula": null
+    },
+    {
+      "name": "contractor",
+      "null_percentage": 0,
+      "type": "Custom List",
+      "values": ["Orange", "Wiślane Tarasy", "PKO", "Biedronka", "Orlen"],
+      "selectionStyle": "random",
+      "distribution": null,
+      "formula": null
+    }
+  ]
+}
