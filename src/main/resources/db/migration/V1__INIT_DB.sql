@@ -1,4 +1,5 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+﻿
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- Link to schema: https://app.quickdatabasediagrams.com/#/d/6ukfXq
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
@@ -6,6 +7,7 @@
 CREATE TABLE "transactions" (
     "transaction_id" varchar(100)   NOT NULL,
     "user_id" varchar(100)   NOT NULL,
+    "name" varchar(200)   NOT NULL,
     "amount" decimal   NOT NULL,
     "transaction_date" date   NOT NULL,
     "is_active" Boolean   NOT NULL,
@@ -49,6 +51,6 @@ REFERENCES "jhi_user" ("id");
 ALTER TABLE "application_settings" ADD CONSTRAINT "fk_application_settings_user_id" FOREIGN KEY("user_id")
 REFERENCES "jhi_user" ("id");
 
-ALTER TABLE "jhi_user_authority" ADD CONSTRAINT "fk_jhi_user_authority_user_id" FOREIGN KEY("user_id")
-REFERENCES "jhi_user" ("id");
+-- ALTER TABLE "jhi_user_authority" ADD CONSTRAINT "fk_jhi_user_authority_user_id" FOREIGN KEY("user_id")
+-- REFERENCES "jhi_user" ("id");
 

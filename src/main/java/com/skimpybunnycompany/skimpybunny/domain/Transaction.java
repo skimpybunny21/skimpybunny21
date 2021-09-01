@@ -31,6 +31,11 @@ public class Transaction {
     private User user;
 
     @NotNull
+    @Size(max = 200)
+    @Column(name = "name")
+    private String name;
+
+    @NotNull
     @Column(name = "amount")
     private BigDecimal amount;
 
@@ -53,6 +58,14 @@ public class Transaction {
     private String contractor;
 
     public Transaction() {}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getTransactionID() {
         return transactionID;

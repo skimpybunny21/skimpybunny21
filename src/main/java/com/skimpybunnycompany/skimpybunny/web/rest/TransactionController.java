@@ -25,16 +25,6 @@ public class TransactionController {
     @Qualifier("apiTransactionsValidatorImpl")
     ApiTransactionsValidator apiTransactionsValidator;
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return new ResponseEntity<>(SecurityUtils.getCurrentUserLogin().get(), HttpStatus.OK);
-    }
-
-    @GetMapping("/test2")
-    public String test2() {
-        return String.valueOf(apiTransactionsValidator.getAvailableSortColumnNames());
-    }
-
     // TODO: /transactions/ - GET
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllTransactions(

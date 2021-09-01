@@ -18,6 +18,7 @@ public class TransactionResponse {
     /* uncomment if User object is needed in TransactionResponse to Client,
      * otherwise it's not needed. */
     //    private User user;
+    private String name;
     private BigDecimal amount;
     private Date transactionDate;
     private Boolean isActive;
@@ -30,11 +31,20 @@ public class TransactionResponse {
         /* uncomment if User object is needed in TransactionResponse to Client,
          * otherwise it's not needed. */
         //        this.user = t.getUser();
+        this.name = t.getName();
         this.amount = t.getAmount();
         this.transactionDate = t.getTransactionDate();
         this.isActive = t.getActive();
         this.category = t.getCategory();
         this.contractor = t.getContractor();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {
