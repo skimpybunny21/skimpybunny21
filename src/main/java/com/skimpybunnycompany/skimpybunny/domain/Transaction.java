@@ -1,6 +1,5 @@
 package com.skimpybunnycompany.skimpybunny.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;

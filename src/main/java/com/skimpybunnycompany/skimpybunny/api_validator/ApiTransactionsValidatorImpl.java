@@ -17,7 +17,7 @@ public class ApiTransactionsValidatorImpl implements ApiTransactionsValidator {
         return availableSortColumnNames;
     }
 
-    private final List<String> availableSortColumnNames = List.of("amount", "transaction_date", "is_active", "category", "contractor");
+    private final List<String> availableSortColumnNames = List.of("amount", "transactionDate", "isActive", "category", "contractor");
 
     public void checkValidClientRequestTitleSearch(Optional<String> title) {
         if (title.isPresent()) {

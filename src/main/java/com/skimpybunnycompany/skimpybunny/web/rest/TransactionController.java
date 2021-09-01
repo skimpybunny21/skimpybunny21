@@ -31,13 +31,14 @@ public class TransactionController {
         @RequestParam(required = false) String title,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "30") int size,
-        @RequestParam(defaultValue = "transaction_date") String sort,
+        @RequestParam(defaultValue = "transactionDate") String sort,
         @RequestParam(defaultValue = "asc") String direction
     ) {
         apiTransactionsValidator.checkUserIsLoggedIn();
         String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 
         apiTransactionsValidator.checkValidClientRequestSize(size);
+        System.out.println(sort);
         apiTransactionsValidator.checkValidClientRequestSortColumnName(sort, apiTransactionsValidator.getAvailableSortColumnNames());
         String sortColumn = sort;
         apiTransactionsValidator.checkValidClientRequestSortDirection(direction);

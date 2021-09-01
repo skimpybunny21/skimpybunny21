@@ -1,7 +1,6 @@
 package com.skimpybunnycompany.skimpybunny.response;
 
 import com.skimpybunnycompany.skimpybunny.domain.Transaction;
-import com.skimpybunnycompany.skimpybunny.domain.User;
 import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Getter;
