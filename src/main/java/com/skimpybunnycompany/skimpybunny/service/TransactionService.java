@@ -16,8 +16,13 @@ public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
 
-    public Map<String, Object> getAllTransactions(String currentUserLogin, Pageable paging, Sort sortBy, Optional<String> title) {
-        Page<Transaction> transactionsPage = transactionRepository.findByUserLogin(currentUserLogin, paging);
+    public Map<String, Object> getAllTransactions(String currentUserLogin, Pageable paging, Optional<String> title) {
+        Page<Transaction> transactionsPage;
+        if (title.isEmpty()) {
+            transactionsPage = transactionRepository.findByUserLogin(currentUserLogin, paging);
+        } else {
+            transactionsPage = transactionRepository.findByUserLogin(currentUserLogin, paging);
+        }
         return prepareTransactionsResponse(transactionsPage);
     }
 

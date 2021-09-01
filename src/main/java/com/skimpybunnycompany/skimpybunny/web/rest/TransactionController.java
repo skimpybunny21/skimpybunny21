@@ -48,18 +48,18 @@ public class TransactionController {
         String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 
         apiTransactionsValidator.checkValidClientRequestSize(size);
-        Pageable paging = PageRequest.of(page, size);
         apiTransactionsValidator.checkValidClientRequestSortColumnName(sort, apiTransactionsValidator.getAvailableSortColumnNames());
         String sortColumn = sort;
         apiTransactionsValidator.checkValidClientRequestSortDirection(direction);
         Sort.Direction sortDirection = direction.toLowerCase().equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Sort sortBy = Sort.by(sortDirection, sortColumn);
+        Pageable paging = PageRequest.of(page, size, sortBy);
 
         apiTransactionsValidator.checkValidClientRequestTitleSearch(Optional.ofNullable(title));
 
         Map<String, Object> response = new HashMap<>();
 
-        response = transactionService.getAllTransactions(currentUserLogin, paging, sortBy, Optional.ofNullable(title));
+        response = transactionService.getAllTransactions(currentUserLogin, paging, Optional.ofNullable(title));
 
         response.put("page", page);
         response.put("size", size);

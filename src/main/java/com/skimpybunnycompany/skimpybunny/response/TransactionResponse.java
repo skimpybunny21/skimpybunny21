@@ -14,7 +14,10 @@ import lombok.ToString;
 public class TransactionResponse {
 
     private String id;
-    private User user;
+
+    /* uncomment if User object is needed in TransactionResponse to Client,
+     * otherwise it's not needed. */
+    //    private User user;
     private BigDecimal amount;
     private Date transactionDate;
     private Boolean isActive;
@@ -23,7 +26,10 @@ public class TransactionResponse {
 
     public TransactionResponse(Transaction t) {
         this.id = t.getTransactionID();
-        this.user = t.getUser();
+
+        /* uncomment if User object is needed in TransactionResponse to Client,
+         * otherwise it's not needed. */
+        //        this.user = t.getUser();
         this.amount = t.getAmount();
         this.transactionDate = t.getTransactionDate();
         this.isActive = t.getActive();
@@ -39,13 +45,15 @@ public class TransactionResponse {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    /* uncomment if User object is needed in TransactionResponse to Client,
+     * otherwise it's not needed. */
+    //    public User getUser() {
+    //        return user;
+    //    }
+    //
+    //    public void setUser(User user) {
+    //        this.user = user;
+    //    }
 
     public Boolean getActive() {
         return isActive;
