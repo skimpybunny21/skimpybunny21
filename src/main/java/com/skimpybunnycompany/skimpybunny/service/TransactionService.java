@@ -21,7 +21,14 @@ public class TransactionService {
         if (title.isEmpty()) {
             transactionsPage = transactionRepository.findByUserLogin(currentUserLogin, paging);
         } else {
-            transactionsPage = transactionRepository.findByUserLogin(currentUserLogin, paging);
+            transactionsPage =
+                transactionRepository.findByUserLoginAndNameContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrContractorContainingIgnoreCase(
+                    currentUserLogin,
+                    title.get(),
+                    title.get(),
+                    title.get(),
+                    paging
+                );
         }
         return prepareTransactionsResponse(transactionsPage);
     }

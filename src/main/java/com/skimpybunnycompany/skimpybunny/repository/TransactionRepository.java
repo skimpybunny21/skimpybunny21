@@ -16,6 +16,11 @@ import org.springframework.stereotype.Repository;
 public interface TransactionRepository extends PagingAndSortingRepository<Transaction, String> {
     //    List<Transaction> findAll ( Pageable paging );
     Page<Transaction> findByUserLogin(String userLogin, Pageable paging);
-    //    Page<Transaction> findByUserLoginAnd(String userLogin, Pageable paging, Sort sort);
-
+    Page<Transaction> findByUserLoginAndNameContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrContractorContainingIgnoreCase(
+        String userLogin,
+        String title,
+        String category,
+        String contractor,
+        Pageable paging
+    );
 }
