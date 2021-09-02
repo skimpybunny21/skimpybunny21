@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionRepository extends PagingAndSortingRepository<Transaction, String> {
-    Page<Transaction> findAll(Pageable paging);
+    // (title.isEmpty() && contractor.isEmpty() && category.isEmpty()) {
     Page<Transaction> findByUserLogin(String userLogin, Pageable paging);
 
+    // (title.Present() && contractor.isEmpty() && category.isEmpty()) {
     Page<Transaction> findByUserLoginAndNameContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrContractorContainingIgnoreCase(
         String userLogin,
         String name,
@@ -20,13 +21,29 @@ public interface TransactionRepository extends PagingAndSortingRepository<Transa
         String contractor,
         Pageable paging
     );
-    //
-    //    @Query("SELECT DISTINCT name FROM people WHERE name NOT IN (:names)")
-    //    List<String> findNonReferencedNames(@Param("names") List<String> names);
-    //
-    //    @Query("SELECT DISTINCT t.category FROM transactions t")
-    //    List<String> findAllCategories(String userLogin);
 
-    //    Page<Transaction> findDistinctByUserLogin(String userLogin);
+    // title.isEmpty() && contractor.isPresent() && category.isEmpty()){
+    Page<Transaction> findByUserLoginAndContractorContainingIgnoreCase(String userLogin, String contractor, Pageable paging);
+
+    // title.isEmpty() && contractor.isEmpty() && category.isPresent()){
+    Page<Transaction> findByUserLoginAndCategoryContainingIgnoreCase(String userLogin, String category, Pageable paging);
+
+    /*
+    // title.isPresent() && contractor.isPresent() && category.isEmpty()){
+    // title.isPresent() && contractor.isEmpty() && category.isPresent()){
+    // title.isPresent() && contractor.isPresent() && category.isPresent())
+     above methods are "the same" as :
+     (title.Present() && contractor.isEmpty() && category.isEmpty())
+     reason is that we still search(filter) transactions
+     */
+
+    // title.isEmpty() && contractor.isPresent() && category.isPresent()){
+    Page<Transaction> findByUserLoginAndCategoryContainingIgnoreCaseAndContractorContainingIgnoreCase(
+        String userLogin,
+        String category,
+        String contractor,
+        Pageable paging
+    );
+
     List<Transaction> getDistinctCategoryByUserLogin(String userLogin);
 }

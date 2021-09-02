@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 public interface ApiTransactionsValidator {
     public List<String> getAvailableSortColumnNames();
 
+    public void checkValidClientRequest(String title, int size, String sort, String direction, String category, String contractor);
+
     public void checkValidClientRequestTitleSearch(Optional<String> title);
 
     public void checkValidClientRequestSortColumnName(String sortColumn, List<String> validColumnsNames);

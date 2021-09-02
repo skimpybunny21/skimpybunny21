@@ -5,6 +5,7 @@ import com.skimpybunnycompany.skimpybunny.repository.TransactionRepository;
 import com.skimpybunnycompany.skimpybunny.response.TransactionResponse;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,11 +17,15 @@ public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
 
-    public Map<String, Object> getAllTransactions(String currentUserLogin, Pageable paging, Optional<String> title) {
+    public Map<String, Object> getAllTransactions(
+        String currentUserLogin,
+        Pageable paging,
+        Optional<String> title,
+        Optional<String> category,
+        Optional<String> contractor
+    ) {
         Page<Transaction> transactionsPage;
-        if (title.isEmpty()) {
-            transactionsPage = transactionRepository.findByUserLogin(currentUserLogin, paging);
-        } else {
+        if (title.isPresent() && contractor.isEmpty() && category.isEmpty()) {
             transactionsPage =
                 transactionRepository.findByUserLoginAndNameContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrContractorContainingIgnoreCase(
                     currentUserLogin,
@@ -29,6 +34,49 @@ public class TransactionService {
                     title.get(),
                     paging
                 );
+        } else if (title.isEmpty() && contractor.isPresent() && category.isEmpty()) {
+            transactionsPage =
+                transactionRepository.findByUserLoginAndContractorContainingIgnoreCase(currentUserLogin, contractor.get(), paging);
+        } else if (title.isEmpty() && contractor.isEmpty() && category.isPresent()) {
+            transactionsPage =
+                transactionRepository.findByUserLoginAndCategoryContainingIgnoreCase(currentUserLogin, category.get(), paging);
+        } else if (title.isPresent() && contractor.isPresent() && category.isEmpty()) {
+            transactionsPage =
+                transactionRepository.findByUserLoginAndNameContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrContractorContainingIgnoreCase(
+                    currentUserLogin,
+                    title.get(),
+                    title.get(),
+                    contractor.get(),
+                    paging
+                );
+        } else if (title.isEmpty() && contractor.isPresent() && category.isPresent()) {
+            transactionsPage =
+                transactionRepository.findByUserLoginAndCategoryContainingIgnoreCaseAndContractorContainingIgnoreCase(
+                    currentUserLogin,
+                    category.get(),
+                    contractor.get(),
+                    paging
+                );
+        } else if (title.isPresent() && contractor.isEmpty() && category.isPresent()) {
+            transactionsPage =
+                transactionRepository.findByUserLoginAndNameContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrContractorContainingIgnoreCase(
+                    currentUserLogin,
+                    title.get(),
+                    category.get(),
+                    contractor.get(),
+                    paging
+                );
+        } else if (title.isPresent() && contractor.isPresent() && category.isPresent()) {
+            transactionsPage =
+                transactionRepository.findByUserLoginAndNameContainingIgnoreCaseOrCategoryContainingIgnoreCaseOrContractorContainingIgnoreCase(
+                    currentUserLogin,
+                    title.get(),
+                    category.get(),
+                    contractor.get(),
+                    paging
+                );
+        } else { // (title.isEmpty() && contractor.isEmpty() && category.isEmpty()) {
+            transactionsPage = transactionRepository.findByUserLogin(currentUserLogin, paging);
         }
         return prepareTransactionsResponse(transactionsPage);
     }

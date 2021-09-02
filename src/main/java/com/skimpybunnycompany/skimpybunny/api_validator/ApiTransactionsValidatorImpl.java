@@ -19,15 +19,6 @@ public class ApiTransactionsValidatorImpl implements ApiTransactionsValidator {
 
     private final List<String> availableSortColumnNames = List.of("amount", "transactionDate", "isActive", "category", "contractor");
 
-    public void checkValidClientRequestTitleSearch(Optional<String> title) {
-        if (title.isPresent()) {
-            int maxTitleSearchLenght = 200;
-            if (title.get().length() > maxTitleSearchLenght) {
-                throw new ApiRequestException("Max lenght for title transactions search is :" + maxTitleSearchLenght);
-            }
-        }
-    }
-
     public void checkValidClientRequestSortColumnName(String sortColumn, List<String> validColumnsNames) {
         if (!validColumnsNames.contains(sortColumn)) {
             throw new ApiRequestException(sortColumn + " column is not in available columns: " + validColumnsNames);
@@ -59,6 +50,41 @@ public class ApiTransactionsValidatorImpl implements ApiTransactionsValidator {
     public void checkValidClientRequestSortDirection(String direction) {
         if (!List.of("asc", "desc").contains(direction)) {
             throw new ApiRequestException("Sorting param should be: asc or desc. Not: " + direction);
+        }
+    }
+
+    public void checkValidClientRequest(String title, int size, String sort, String direction, String category, String contractor) {
+        checkUserIsLoggedIn();
+        checkValidClientRequestSize(size);
+        checkValidClientRequestSortColumnName(sort, getAvailableSortColumnNames());
+        checkValidClientRequestSortDirection(direction);
+        checkValidClientRequestTitleSearch(Optional.ofNullable(title));
+        checkValidClientRequestCategorySearch(Optional.ofNullable(category));
+        checkValidClientRequestContractorSearch(Optional.ofNullable(contractor));
+    }
+
+    private void checkValidClientRequestContractorSearch(Optional<String> contractor) {
+        checkMaxLenghtString(contractor, maxFieldSizeContractor);
+    }
+
+    private void checkValidClientRequestCategorySearch(Optional<String> category) {
+        checkMaxLenghtString(category, maxFieldSizeCategory);
+    }
+
+    public void checkValidClientRequestTitleSearch(Optional<String> title) {
+        checkMaxLenghtString(title, maxFieldSizeTitle);
+    }
+
+    private int maxFieldSizeTitle = 200;
+    private int maxFieldSizeCategory = 200;
+    private int maxFieldSizeContractor = 200;
+
+    private void checkMaxLenghtString(Optional<String> field, int maxFieldSize) {
+        if (field.isPresent()) {
+            int maxTitleSearchLenght = maxFieldSize;
+            if (field.get().length() > maxTitleSearchLenght) {
+                throw new ApiRequestException("Max lenght for " + field + " search is :" + maxFieldSize);
+            }
         }
     }
 }

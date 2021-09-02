@@ -26,32 +26,35 @@ public class TransactionController {
     @Qualifier("apiTransactionsValidatorImpl")
     ApiTransactionsValidator apiTransactionsValidator;
 
-    // TODO: /transactions/ - GET
+    // /api/transactions/ - GET
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllTransactions(
         @RequestParam(required = false) String title,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "30") int size,
         @RequestParam(defaultValue = "transactionDate") String sort,
-        @RequestParam(defaultValue = "asc") String direction
+        @RequestParam(defaultValue = "asc") String direction,
+        @RequestParam(required = false) String category,
+        @RequestParam(required = false) String contractor
     ) {
-        apiTransactionsValidator.checkUserIsLoggedIn();
-        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+        apiTransactionsValidator.checkValidClientRequest(title, size, sort, direction, category, contractor);
 
-        apiTransactionsValidator.checkValidClientRequestSize(size);
-        System.out.println(sort);
-        apiTransactionsValidator.checkValidClientRequestSortColumnName(sort, apiTransactionsValidator.getAvailableSortColumnNames());
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
         String sortColumn = sort;
-        apiTransactionsValidator.checkValidClientRequestSortDirection(direction);
         Sort.Direction sortDirection = direction.toLowerCase().equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Sort sortBy = Sort.by(sortDirection, sortColumn);
         Pageable paging = PageRequest.of(page, size, sortBy);
 
-        apiTransactionsValidator.checkValidClientRequestTitleSearch(Optional.ofNullable(title));
-
         Map<String, Object> response = new HashMap<>();
 
-        response = transactionService.getAllTransactions(currentUserLogin, paging, Optional.ofNullable(title));
+        response =
+            transactionService.getAllTransactions(
+                currentUserLogin,
+                paging,
+                Optional.ofNullable(title),
+                Optional.ofNullable(category),
+                Optional.ofNullable(contractor)
+            );
 
         response.put("page", page);
         response.put("size", size);
@@ -65,7 +68,7 @@ public class TransactionController {
     // TODO: /transactions/{user}/{transaction_id} - PATCH, DELETE, GET
     // TODO: /transactions/{user} - PUT
 
-    // TODO: /transactions/categories - GET
+    // /api/transactions/categories - GET
     @GetMapping("/categories")
     public ResponseEntity<Map<String, Object>> getAllCategories() {
         apiTransactionsValidator.checkUserIsLoggedIn();
