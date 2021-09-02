@@ -51,4 +51,23 @@ public class TransactionService {
         response.put("totalItems", transactionsPage.getTotalElements());
         return response;
     }
+
+    public Set<String> getAllCategories(String userLogin) {
+        Set<String> categories = new HashSet<>();
+        List<Transaction> transactions = transactionRepository.getDistinctCategoryByUserLogin(userLogin);
+        categories = getCategoriesFromTransactions(transactions);
+        return categories;
+    }
+
+    private Set<String> getCategoriesFromTransactions(List<Transaction> transactions) {
+        Set<String> categories = new HashSet<>();
+        transactions
+            .stream()
+            .forEach(
+                transaction -> {
+                    categories.add(transaction.getCategory());
+                }
+            );
+        return categories;
+    }
 }

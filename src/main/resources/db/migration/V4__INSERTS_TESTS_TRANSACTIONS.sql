@@ -1,0 +1,2 @@
+insert into transactions (transaction_id, user_id, name, amount, transaction_date, is_active, category, contractor) values ('ce47ce6b-ab61-4dc8-87af-dc3467a94a92', '00u1lrmybws64w6205d7', 'Wine - Red, Ej Gallo', 943.01, '2020-10-16', false, 'kwiatek', 'Orange');
+insert into transactions (transaction_id, user_id, name, amount, transaction_date, is_active, category, contractor) values ('7aa7aff7-3e3b-4418-980b-843fdb2e465d', '00u1lrmybws64w6205d7', 'Veal - Shank', 68.19, '2020-11-2', false, 'dziecko', 'restauracja');

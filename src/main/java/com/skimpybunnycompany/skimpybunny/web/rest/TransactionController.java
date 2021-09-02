@@ -2,6 +2,7 @@ package com.skimpybunnycompany.skimpybunny.web.rest;
 
 import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidator;
 import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidatorImpl;
+import com.skimpybunnycompany.skimpybunny.domain.Transaction;
 import com.skimpybunnycompany.skimpybunny.security.SecurityUtils;
 import com.skimpybunnycompany.skimpybunny.service.TransactionService;
 import java.util.*;
@@ -60,7 +61,20 @@ public class TransactionController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
     // TODO: /transactions/{user}/{transaction_id} - PATCH, DELETE, GET
     // TODO: /transactions/{user} - PUT
+
+    // TODO: /transactions/categories - GET
+    @GetMapping("/categories")
+    public ResponseEntity<Set<String>> getAllCategories() {
+        apiTransactionsValidator.checkUserIsLoggedIn();
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+
+        Set<String> categories = new HashSet<>();
+        categories = transactionService.getAllCategories(currentUserLogin);
+        return new ResponseEntity<Set<String>>(categories, HttpStatus.OK);
+    }
+    // TODO: /transactions/contractors - GET
 
 }
