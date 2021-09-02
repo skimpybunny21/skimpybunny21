@@ -67,13 +67,15 @@ public class TransactionController {
 
     // TODO: /transactions/categories - GET
     @GetMapping("/categories")
-    public ResponseEntity<Set<String>> getAllCategories() {
+    public ResponseEntity<Map<String, Object>> getAllCategories() {
         apiTransactionsValidator.checkUserIsLoggedIn();
         String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 
-        Set<String> categories = new HashSet<>();
-        categories = transactionService.getAllCategories(currentUserLogin);
-        return new ResponseEntity<Set<String>>(categories, HttpStatus.OK);
+        Map<String, Object> response = new HashMap<>();
+        Set<String> categories = transactionService.getAllCategories(currentUserLogin);
+        response.put("total", categories.size());
+        response.put("categories", categories);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
     // TODO: /transactions/contractors - GET
 
