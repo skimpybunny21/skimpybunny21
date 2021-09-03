@@ -1,5 +1,4 @@
-﻿
--- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- Link to schema: https://app.quickdatabasediagrams.com/#/d/6ukfXq
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
@@ -41,6 +40,21 @@ CREATE TABLE "application_settings" (
     "is_paid_subscription" Boolean   NOT NULL
 );
 
+-- CREATE TABLE "jhi_user" (
+--     "id" varchar(100)   NOT NULL,
+--     "login" varchar(50)   NOT NULL,
+--     "email" varchar(191)   NOT NULL,
+--     "first_name" (50)   NOT NULL,
+--     "last_name" (50)   NOT NULL,
+--     CONSTRAINT "pk_jhi_user" PRIMARY KEY (
+--         "id"
+--      )
+-- );
+
+-- CREATE TABLE "jhi_user_authority" (
+--     "user_id" varchar(100)   NOT NULL,
+--     "authority_name" varchar(50)   NOT NULL
+-- );
 
 ALTER TABLE "transactions" ADD CONSTRAINT "fk_transactions_user_id" FOREIGN KEY("user_id")
 REFERENCES "jhi_user" ("id");

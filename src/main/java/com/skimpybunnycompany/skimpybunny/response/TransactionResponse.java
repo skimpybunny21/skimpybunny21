@@ -2,6 +2,7 @@ package com.skimpybunnycompany.skimpybunny.response;
 
 import com.skimpybunnycompany.skimpybunny.domain.Transaction;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ public class TransactionResponse {
     //    private User user;
     private String name;
     private BigDecimal amount;
-    private Date transactionDate;
+    private ZonedDateTime transactionDate;
     private Boolean isActive;
     private String category;
     private String contractor;
@@ -96,11 +97,11 @@ public class TransactionResponse {
         this.amount = amount;
     }
 
-    public Date getTransactionDate() {
+    public ZonedDateTime getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(ZonedDateTime transactionDate) {
         this.transactionDate = transactionDate;
     }
 }

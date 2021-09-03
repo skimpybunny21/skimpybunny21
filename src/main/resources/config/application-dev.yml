@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://skimpybusiness.cumjn4ucncdg.us-east-2.rds.amazonaws.com:5432/postgres
+    url: jdbc:postgresql://localhost:5432/skimpybunny
     username: postgres
-    password: yasmtShkAAu8Q2AoG1e8F1RfLkK
+    password: postgres
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -44,7 +44,7 @@ spring:
     enabled: false
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev
-  #    contexts: dev, faker
+
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
@@ -69,7 +69,6 @@ jhipster:
     ehcache: # Ehcache configuration
       time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
       max-entries: 100 # Number of objects in each cache entry
-
   # CORS is only enabled by default with the "dev" profile
   cors:
     # Allow Ionic for JHipster by default (* no longer allowed in Spring Boot 2.4+)

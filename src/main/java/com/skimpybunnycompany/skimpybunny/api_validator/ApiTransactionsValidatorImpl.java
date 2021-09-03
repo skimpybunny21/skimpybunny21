@@ -2,6 +2,7 @@ package com.skimpybunnycompany.skimpybunny.api_validator;
 
 import com.skimpybunnycompany.skimpybunny.exception.ApiRequestException;
 import com.skimpybunnycompany.skimpybunny.security.SecurityUtils;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -53,7 +54,16 @@ public class ApiTransactionsValidatorImpl implements ApiTransactionsValidator {
         }
     }
 
-    public void checkValidClientRequest(String title, int size, String sort, String direction, String category, String contractor) {
+    public void checkValidClientRequest(
+        String title,
+        int size,
+        String sort,
+        String direction,
+        String category,
+        String contractor,
+        String isActive,
+        String dateFrom
+    ) {
         checkUserIsLoggedIn();
         checkValidClientRequestSize(size);
         checkValidClientRequestSortColumnName(sort, getAvailableSortColumnNames());
@@ -61,6 +71,30 @@ public class ApiTransactionsValidatorImpl implements ApiTransactionsValidator {
         checkValidClientRequestTitleSearch(Optional.ofNullable(title));
         checkValidClientRequestCategorySearch(Optional.ofNullable(category));
         checkValidClientRequestContractorSearch(Optional.ofNullable(contractor));
+        checkValidClientRequestisActive(isActive);
+        checkValidClientRequestdateFrom(dateFrom);
+    }
+
+    public void checkValidClientRequestdateFrom(String dateFrom) {
+        //        if (dateFrom.equals("lastWeekNextMonth"){
+        //
+        //        } else if (dateFrom.equals("lastWeekNext3Month")) {
+        //
+        //        } else if (dateFrom.equals("lastWeekNextAll")) {
+        //
+        //        } else if (dateFrom.equals("lastAllNextAll")) {
+        //
+        ////        } else if (ZonedDateTime.parse(dateFrom).i)
+        //
+        //        } else{
+        //
+        //        }
+    }
+
+    public void checkValidClientRequestisActive(String isActive) {
+        if (!List.of("false", "true").contains(isActive.toLowerCase())) {
+            throw new ApiRequestException("isActive can't be: " + isActive + ". isActive should be 'true' or 'false'.");
+        }
     }
 
     private void checkValidClientRequestContractorSearch(Optional<String> contractor) {
@@ -83,7 +117,7 @@ public class ApiTransactionsValidatorImpl implements ApiTransactionsValidator {
         if (field.isPresent()) {
             int maxTitleSearchLenght = maxFieldSize;
             if (field.get().length() > maxTitleSearchLenght) {
-                throw new ApiRequestException("Max lenght for " + field + " search is :" + maxFieldSize);
+                throw new ApiRequestException("Max length for " + field + " search is :" + maxFieldSize);
             }
         }
     }

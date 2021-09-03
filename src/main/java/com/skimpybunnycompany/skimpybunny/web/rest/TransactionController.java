@@ -35,9 +35,11 @@ public class TransactionController {
         @RequestParam(defaultValue = "transactionDate") String sort,
         @RequestParam(defaultValue = "asc") String direction,
         @RequestParam(required = false) String category,
-        @RequestParam(required = false) String contractor
+        @RequestParam(required = false) String contractor,
+        @RequestParam(defaultValue = "false") String isActive,
+        @RequestParam(defaultValue = "lastWeekNextMonth") String dateFrom // for range all transactions
     ) {
-        apiTransactionsValidator.checkValidClientRequest(title, size, sort, direction, category, contractor);
+        apiTransactionsValidator.checkValidClientRequest(title, size, sort, direction, category, contractor, isActive, dateFrom);
 
         String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
         String sortColumn = sort;

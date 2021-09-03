@@ -9,7 +9,16 @@ import org.springframework.stereotype.Service;
 public interface ApiTransactionsValidator {
     public List<String> getAvailableSortColumnNames();
 
-    public void checkValidClientRequest(String title, int size, String sort, String direction, String category, String contractor);
+    public void checkValidClientRequest(
+        String title,
+        int size,
+        String sort,
+        String direction,
+        String category,
+        String contractor,
+        String isActive,
+        String dateFrom
+    );
 
     public void checkValidClientRequestTitleSearch(Optional<String> title);
 
@@ -20,4 +29,8 @@ public interface ApiTransactionsValidator {
     public void checkValidClientRequestSize(int size);
 
     public void checkValidClientRequestSortDirection(String direction);
+
+    public void checkValidClientRequestisActive(String isActive);
+
+    public void checkValidClientRequestdateFrom(String dateFrom);
 }

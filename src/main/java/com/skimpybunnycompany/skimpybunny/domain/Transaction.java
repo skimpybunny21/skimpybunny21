@@ -1,6 +1,7 @@
 package com.skimpybunnycompany.skimpybunny.domain;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,7 +32,7 @@ public class Transaction {
 
     @NotNull
     @Size(max = 200)
-    @Column(name = "name")
+    @Column
     private String name;
 
     @NotNull
@@ -40,7 +41,7 @@ public class Transaction {
 
     @NotNull
     @Column(name = "transaction_date")
-    private Date transactionDate;
+    private ZonedDateTime transactionDate;
 
     @NotNull
     @Column(name = "is_active")
@@ -90,11 +91,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Date getTransactionDate() {
+    public ZonedDateTime getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(ZonedDateTime transactionDate) {
         this.transactionDate = transactionDate;
     }
 
