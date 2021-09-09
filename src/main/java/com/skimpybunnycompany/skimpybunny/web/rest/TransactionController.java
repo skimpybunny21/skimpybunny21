@@ -1,8 +1,6 @@
 package com.skimpybunnycompany.skimpybunny.web.rest;
 
 import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidator;
-import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidatorImpl;
-import com.skimpybunnycompany.skimpybunny.domain.Transaction;
 import com.skimpybunnycompany.skimpybunny.security.SecurityUtils;
 import com.skimpybunnycompany.skimpybunny.service.TransactionService;
 import java.util.*;
@@ -26,20 +24,25 @@ public class TransactionController {
     @Qualifier("apiTransactionsValidatorImpl")
     ApiTransactionsValidator apiTransactionsValidator;
 
+    @Autowired
+    public TransactionController(TransactionService transactionService, ApiTransactionsValidator apiTransactionsValidator) {
+        this.transactionService = transactionService;
+        this.apiTransactionsValidator = apiTransactionsValidator;
+    }
+
     // /api/transactions/ - GET
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllTransactions(
-        @RequestParam(required = false) String title,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "30") int size,
         @RequestParam(defaultValue = "transactionDate") String sort,
         @RequestParam(defaultValue = "asc") String direction,
+        @RequestParam(required = false) String name,
         @RequestParam(required = false) String category,
         @RequestParam(required = false) String contractor,
-        @RequestParam(defaultValue = "false") String isActive,
-        @RequestParam(defaultValue = "lastWeekNextMonth") String dateFrom // for range all transactions
+        @RequestParam(required = false) String dates
     ) {
-        apiTransactionsValidator.checkValidClientRequest(title, size, sort, direction, category, contractor, isActive, dateFrom);
+        apiTransactionsValidator.checkValidClientRequest(name, size, sort, direction, category, contractor, dates);
 
         String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
         String sortColumn = sort;
@@ -48,21 +51,21 @@ public class TransactionController {
         Pageable paging = PageRequest.of(page, size, sortBy);
 
         Map<String, Object> response = new HashMap<>();
-
         response =
             transactionService.getAllTransactions(
                 currentUserLogin,
                 paging,
-                Optional.ofNullable(title),
+                Optional.ofNullable(name),
                 Optional.ofNullable(category),
-                Optional.ofNullable(contractor)
+                Optional.ofNullable(contractor),
+                Optional.ofNullable(dates)
             );
 
         response.put("page", page);
         response.put("size", size);
         response.put("sort", sort);
         response.put("direction", direction);
-        response.put("title", title);
+        response.put("title", name);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

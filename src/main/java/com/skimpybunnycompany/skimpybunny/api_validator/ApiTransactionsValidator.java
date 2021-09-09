@@ -1,5 +1,7 @@
 package com.skimpybunnycompany.skimpybunny.api_validator;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
@@ -16,7 +18,6 @@ public interface ApiTransactionsValidator {
         String direction,
         String category,
         String contractor,
-        String isActive,
         String dateFrom
     );
 
@@ -30,7 +31,9 @@ public interface ApiTransactionsValidator {
 
     public void checkValidClientRequestSortDirection(String direction);
 
-    public void checkValidClientRequestisActive(String isActive);
+    public void checkValidClientRequestdateFrom(Optional<String> dateFrom);
 
-    public void checkValidClientRequestdateFrom(String dateFrom);
+    public List<LocalDate> getDatesFromApiQuery(String validedDates);
+
+    public boolean checkValidApiInputDateFormat(String dates, String validPatternDateTimeFormat, List<String> validNamesOfDates);
 }
