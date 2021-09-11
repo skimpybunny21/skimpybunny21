@@ -1,6 +1,11 @@
 package com.skimpybunnycompany.skimpybunny.response;
 
+import static tech.jhipster.config.JHipsterDefaults.ApiDocs.description;
+
 import com.skimpybunnycompany.skimpybunny.domain.Transaction;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -10,21 +15,34 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+@ApiModel(description = "Transaction model in returned list of transactions", value = "TransactionResponse")
 @Getter
 @Setter
 @ToString
 public class TransactionResponse {
 
+    @ApiModelProperty(value = "Unique guid", position = 1, example = "7aaee0e2-6884-4fd7-ba63-21d76723dce2")
     private String id;
 
     /* uncomment if User object is needed in TransactionResponse to Client,
      * otherwise it's not needed. */
     //    private User user;
+    @ApiModelProperty(value = "Name for transaction", position = 2, example = "purchase of a washing machine")
     private String name;
+
+    @ApiModelProperty(value = "Amount for transaction", position = 3, example = "1199.99")
     private BigDecimal amount;
+
+    @ApiModelProperty(value = "transaction date", position = 2, example = "2021-09-01")
     private LocalDate transactionDate;
+
+    @ApiModelProperty(value = "is transaction shown in calculations (future feature)", position = 2, example = "true")
     private Boolean isActive;
+
+    @ApiModelProperty(value = "category for transaction", position = 2, example = "home")
     private String category;
+
+    @ApiModelProperty(value = "contractor for transaction", position = 2, example = "MediaExpert")
     private String contractor;
 
     public TransactionResponse(Transaction t) {

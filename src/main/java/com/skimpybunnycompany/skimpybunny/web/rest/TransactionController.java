@@ -1,8 +1,16 @@
 package com.skimpybunnycompany.skimpybunny.web.rest;
 
 import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidator;
+import com.skimpybunnycompany.skimpybunny.response.TransactionResponse;
+import com.skimpybunnycompany.skimpybunny.response.TransactionsResponseSchema;
 import com.skimpybunnycompany.skimpybunny.security.SecurityUtils;
 import com.skimpybunnycompany.skimpybunny.service.TransactionService;
+import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,9 +18,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Api(value = "Transactions controller", description = "REST APIs related transactions")
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
@@ -30,17 +40,45 @@ public class TransactionController {
         this.apiTransactionsValidator = apiTransactionsValidator;
     }
 
-    // /api/transactions/ - GET
+    @ApiOperation(
+        value = "getAllTransactions",
+        notes = "Get list of transactions that match criteria query",
+        response = TransactionsResponseSchema.class,
+        tags = "getAllTransactions"
+    )
+    @ApiResponses(
+        value = {
+            @ApiResponse(
+                responseCode = "200",
+                description = "Request's OK, Optional list of transactions is in response",
+                content = { @Content(mediaType = "application/json", schema = @Schema(implementation = TransactionsResponseSchema.class)) }
+            ),
+            @ApiResponse(responseCode = "400", description = "Bad request. Try correct your query."),
+        }
+    )
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllTransactions(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "30") int size,
-        @RequestParam(defaultValue = "transactionDate") String sort,
-        @RequestParam(defaultValue = "asc") String direction,
-        @RequestParam(required = false) String name,
-        @RequestParam(required = false) String category,
-        @RequestParam(required = false) String contractor,
-        @RequestParam(required = false) String dates
+        @ApiParam(value = "i.e. '0'  - page number of returned list of transactions. Default: '0' - first page") @RequestParam(
+            defaultValue = "0"
+        ) int page,
+        @ApiParam(value = "i.e. '20' - page number of returned list of transactions. Default: '30' transactions.'") @RequestParam(
+            defaultValue = "30"
+        ) int size,
+        @ApiParam(value = "default 'transactionDate' - name of column by which to sort the table") @RequestParam(
+            defaultValue = "transactionDate"
+        ) String sort,
+        @ApiParam(value = "default 'asc' - sort direction") @RequestParam(defaultValue = "asc") String direction,
+        @ApiParam(value = "'transaction name' - optional pattern for name of transaction") @RequestParam(required = false) String name,
+        @ApiParam(value = "'category name' - optional pattern for category name of transaction") @RequestParam(
+            required = false
+        ) String category,
+        @ApiParam(value = "'contractor name' - optional pattern for contractor name of transaction") @RequestParam(
+            required = false
+        ) String contractor,
+        @ApiParam(
+            value = "'dates range' - optional dates range for transaction. " +
+            "Accepted: lastWeekNextWeek, lastMonthNextMonth, lastMonthNext3Months or i.e. 2021-09-01,2021-12-01"
+        ) @RequestParam(required = false) String dates
     ) {
         apiTransactionsValidator.checkValidClientRequest(name, size, sort, direction, category, contractor, dates);
 
@@ -61,11 +99,14 @@ public class TransactionController {
                 Optional.ofNullable(dates)
             );
 
-        response.put("page", page);
-        response.put("size", size);
-        response.put("sort", sort);
-        response.put("direction", direction);
-        response.put("title", name);
+        response.put("queryPage", page);
+        response.put("querySize", size);
+        response.put("querySort", sort);
+        response.put("queryDirection", direction);
+        response.put("queryName", name);
+        response.put("queryCategory", category);
+        response.put("queryContractory", contractor);
+        response.put("queryDates", dates);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
