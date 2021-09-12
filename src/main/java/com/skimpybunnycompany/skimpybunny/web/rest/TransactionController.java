@@ -126,6 +126,17 @@ public class TransactionController {
         response.put("categories", categories);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
-    // TODO: /transactions/contractors - GET
 
+    // /transactions/contractors - GET
+    @GetMapping("/contractors")
+    public ResponseEntity<Map<String, Object>> getAllTransactions() {
+        apiTransactionsValidator.checkUserIsLoggedIn();
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+
+        Map<String, Object> response = new HashMap<>();
+        Set<String> contractors = transactionService.getAllContractors(currentUserLogin);
+        response.put("total", contractors.size());
+        response.put("categories", contractors);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
 }

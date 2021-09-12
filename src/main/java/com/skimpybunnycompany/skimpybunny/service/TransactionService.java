@@ -227,4 +227,23 @@ public class TransactionService {
             );
         return categories;
     }
+
+    public Set<String> getAllContractors(String userLogin) {
+        Set<String> contractors = new HashSet<>();
+        List<Transaction> transactions = transactionRepository.getDistinctContractorByUserLogin(userLogin);
+        contractors = getContractorsFromTransactions(transactions);
+        return contractors;
+    }
+
+    private Set<String> getContractorsFromTransactions(List<Transaction> transactions) {
+        Set<String> contractors = new HashSet<>();
+        transactions
+            .stream()
+            .forEach(
+                transaction -> {
+                    contractors.add(transaction.getContractor());
+                }
+            );
+        return contractors;
+    }
 }

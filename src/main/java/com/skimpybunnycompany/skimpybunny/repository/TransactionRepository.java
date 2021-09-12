@@ -132,4 +132,5 @@ public interface TransactionRepository extends PagingAndSortingRepository<Transa
     );
 
     List<Transaction> getDistinctCategoryByUserLogin(String userLogin);
+    List<Transaction> getDistinctContractorByUserLogin(String userLogin);
 }
