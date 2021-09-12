@@ -44,7 +44,7 @@ public class TransactionController {
         value = "getAllTransactions",
         notes = "Get list of transactions that match criteria query",
         response = TransactionsResponseSchema.class,
-        tags = "getAllTransactions"
+        tags = "transactions-resource"
     )
     @ApiResponses(
         value = {
