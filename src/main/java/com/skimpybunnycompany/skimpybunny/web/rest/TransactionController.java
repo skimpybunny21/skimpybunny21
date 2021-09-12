@@ -1,24 +1,25 @@
 package com.skimpybunnycompany.skimpybunny.web.rest;
 
 import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidator;
+import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import com.skimpybunnycompany.skimpybunny.response.TransactionResponse;
 import com.skimpybunnycompany.skimpybunny.response.TransactionsResponseSchema;
 import com.skimpybunnycompany.skimpybunny.security.SecurityUtils;
 import com.skimpybunnycompany.skimpybunny.service.TransactionService;
 import io.swagger.annotations.*;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.*;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,7 +81,7 @@ public class TransactionController {
             "Accepted: lastWeekNextWeek, lastMonthNextMonth, lastMonthNext3Months or i.e. 2021-09-01,2021-12-01"
         ) @RequestParam(required = false) String dates
     ) {
-        apiTransactionsValidator.checkValidClientRequest(name, size, sort, direction, category, contractor, dates);
+        apiTransactionsValidator.checkValidClientRequestGetTransactions(name, size, sort, direction, category, contractor, dates);
 
         String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
         String sortColumn = sort;
@@ -114,6 +115,22 @@ public class TransactionController {
     // TODO: /transactions/{user}/{transaction_id} - PATCH, DELETE, GET
     // TODO: /transactions/{user} - PUT
 
+    @PostMapping("/")
+    public ResponseEntity<TransactionResponse> createTransaction(
+        @Valid @RequestBody(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") TransactionRequest transactionRequest,
+        @RequestParam String userLogin
+    ) {
+        String transactionUserLogin = userLogin != null ? userLogin : SecurityUtils.getCurrentUserLogin().get();
+
+        Optional<TransactionResponse> transactionResponse = transactionService.createTransaction(transactionRequest, transactionUserLogin);
+
+        if (transactionResponse.isPresent()) {
+            return new ResponseEntity<>(transactionResponse.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     // /api/transactions/categories - GET
     @GetMapping("/categories")
     public ResponseEntity<Map<String, Object>> getAllCategories() {
@@ -129,14 +146,14 @@ public class TransactionController {
 
     // /transactions/contractors - GET
     @GetMapping("/contractors")
-    public ResponseEntity<Map<String, Object>> getAllTransactions() {
+    public ResponseEntity<Map<String, Object>> getAllContractors() {
         apiTransactionsValidator.checkUserIsLoggedIn();
         String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
 
         Map<String, Object> response = new HashMap<>();
         Set<String> contractors = transactionService.getAllContractors(currentUserLogin);
         response.put("total", contractors.size());
-        response.put("categories", contractors);
+        response.put("contractors", contractors);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
 }

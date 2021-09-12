@@ -2,10 +2,15 @@ package com.skimpybunnycompany.skimpybunny.service;
 
 import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidator;
 import com.skimpybunnycompany.skimpybunny.domain.Transaction;
+import com.skimpybunnycompany.skimpybunny.domain.User;
+import com.skimpybunnycompany.skimpybunny.repository.TransactionInsertRepository;
 import com.skimpybunnycompany.skimpybunny.repository.TransactionRepository;
+import com.skimpybunnycompany.skimpybunny.repository.UserRepository;
+import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import com.skimpybunnycompany.skimpybunny.response.TransactionResponse;
 import java.time.LocalDate;
 import java.util.*;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
@@ -21,13 +26,26 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
 
     @Autowired
+    private final UserRepository userRepository;
+
+    @Autowired
+    private final TransactionInsertRepository transactionInsertRepository;
+
+    @Autowired
     @Qualifier("apiTransactionsValidatorImpl")
     private final ApiTransactionsValidator apiTransactionsValidator;
 
     @Autowired
-    public TransactionService(TransactionRepository transactionRepository, ApiTransactionsValidator apiTransactionsValidator) {
+    public TransactionService(
+        TransactionRepository transactionRepository,
+        ApiTransactionsValidator apiTransactionsValidator,
+        UserRepository userRepository,
+        TransactionInsertRepository transactionInsertRepository
+    ) {
         this.transactionRepository = transactionRepository;
         this.apiTransactionsValidator = apiTransactionsValidator;
+        this.userRepository = userRepository;
+        this.transactionInsertRepository = transactionInsertRepository;
     }
 
     public Map<String, Object> getAllTransactions(
@@ -245,5 +263,17 @@ public class TransactionService {
                 }
             );
         return contractors;
+    }
+
+    public Optional<TransactionResponse> createTransaction(TransactionRequest transactionRequest, String transactionUserLogin) {
+        Transaction newTransaction = null;
+        Optional<User> user = userRepository.findOneByLogin(transactionUserLogin);
+        if (user.isPresent()) {
+            System.out.println(user.get());
+            newTransaction = new Transaction(transactionRequest);
+            newTransaction.setUser(user.get());
+            transactionInsertRepository.saveTransaction(newTransaction);
+        }
+        return Optional.empty();
     }
 }

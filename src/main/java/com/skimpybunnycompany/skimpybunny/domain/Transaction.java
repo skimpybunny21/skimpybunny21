@@ -1,8 +1,10 @@
 package com.skimpybunnycompany.skimpybunny.domain;
 
+import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -58,6 +60,16 @@ public class Transaction {
     private String contractor;
 
     public Transaction() {}
+
+    public Transaction(TransactionRequest transactionRequest) {
+        this.transactionID = UUID.randomUUID().toString();
+        this.name = transactionRequest.getName();
+        this.amount = transactionRequest.getAmount();
+        this.transactionDate = transactionRequest.getTransactionDate();
+        this.isActive = transactionRequest.isActive();
+        this.category = transactionRequest.getCategory();
+        this.contractor = transactionRequest.getContractor();
+    }
 
     public String getName() {
         return name;

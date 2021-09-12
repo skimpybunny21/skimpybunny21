@@ -1,6 +1,7 @@
 package com.skimpybunnycompany.skimpybunny.api_validator;
 
 import com.skimpybunnycompany.skimpybunny.exception.ApiRequestException;
+import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import com.skimpybunnycompany.skimpybunny.security.SecurityUtils;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -64,7 +65,7 @@ public class ApiTransactionsValidatorImpl implements ApiTransactionsValidator {
         }
     }
 
-    public void checkValidClientRequest(
+    public void checkValidClientRequestGetTransactions(
         String title,
         int size,
         String sort,

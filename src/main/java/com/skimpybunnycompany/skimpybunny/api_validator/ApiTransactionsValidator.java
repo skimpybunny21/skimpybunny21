@@ -1,5 +1,6 @@
 package com.skimpybunnycompany.skimpybunny.api_validator;
 
+import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 public interface ApiTransactionsValidator {
     public List<String> getAvailableSortColumnNames();
 
-    public void checkValidClientRequest(
+    public void checkValidClientRequestGetTransactions(
         String title,
         int size,
         String sort,
