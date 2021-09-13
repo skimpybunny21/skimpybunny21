@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -281,5 +282,10 @@ public class TransactionService {
             }
         }
         return insertedTransactionResponse;
+    }
+
+    public String deleteTransaction(String transactionID) {
+        transactionRepository.deleteById(transactionID);
+        return "Transaction has been deleted successfully";
     }
 }

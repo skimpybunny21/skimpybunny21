@@ -113,7 +113,11 @@ public class TransactionController {
     }
 
     // TODO: /transactions/{user}/{transaction_id} - PATCH, DELETE, GET
-    // TODO: /transactions/{user} - PUT
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> getTransaction(@PathVariable String id) {
+        return new ResponseEntity<>(transactionService.deleteTransaction(id), HttpStatus.OK);
+    }
 
     @PostMapping("/")
     public ResponseEntity<TransactionResponse> createTransaction(
@@ -121,9 +125,7 @@ public class TransactionController {
         @RequestParam String userLogin
     ) {
         String transactionUserLogin = userLogin != null ? userLogin : SecurityUtils.getCurrentUserLogin().get();
-
         Optional<TransactionResponse> transactionResponse = transactionService.createTransaction(transactionRequest, transactionUserLogin);
-
         if (transactionResponse.isPresent()) {
             return new ResponseEntity<>(transactionResponse.get(), HttpStatus.OK);
         } else {
