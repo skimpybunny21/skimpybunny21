@@ -14,10 +14,19 @@ public class TransactionInsertRepository {
     private EntityManager entityManager;
 
     @Transactional
-    public void saveTransaction(Transaction newTransaction) {
-        entityManager
+    public int saveTransaction(Transaction newTransaction) {
+        return entityManager
             .createNativeQuery(
-                "INSERT INTO app_db.transactions (transaction_id, user_id, name, amount, transaction_date, is_active, category, contractor) values (?,?,?,?,?,?,?,?)"
+                "INSERT INTO app_db.transactions (" +
+                "transaction_id, " +
+                "user_id, " +
+                "name, " +
+                "amount, " +
+                "transaction_date, " +
+                "is_active, " +
+                "category, " +
+                "contractor) " +
+                "values (?,?,?,?,?,?,?,?)"
             )
             .setParameter(1, newTransaction.getTransactionID())
             .setParameter(2, newTransaction.getUser().getId())

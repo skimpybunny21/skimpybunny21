@@ -267,13 +267,19 @@ public class TransactionService {
 
     public Optional<TransactionResponse> createTransaction(TransactionRequest transactionRequest, String transactionUserLogin) {
         Transaction newTransaction = null;
+        Optional<TransactionResponse> insertedTransactionResponse = null;
         Optional<User> user = userRepository.findOneByLogin(transactionUserLogin);
         if (user.isPresent()) {
             System.out.println(user.get());
             newTransaction = new Transaction(transactionRequest);
+            String newTransactionID = newTransaction.getTransactionID();
             newTransaction.setUser(user.get());
-            transactionInsertRepository.saveTransaction(newTransaction);
+            if (1 == transactionInsertRepository.saveTransaction(newTransaction)) {
+                insertedTransactionResponse = Optional.of(new TransactionResponse(newTransaction));
+            } else {
+                insertedTransactionResponse = Optional.empty();
+            }
         }
-        return Optional.empty();
+        return insertedTransactionResponse;
     }
 }
