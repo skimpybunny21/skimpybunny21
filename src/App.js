@@ -18,7 +18,6 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    // Support for mobile resolutions
     enquireScreen((b) => {
       this.setState({ isMobile: !!b });
     });

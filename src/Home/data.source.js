@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import React, { Component } from 'react';
 import Popup from '../Components/ModalLogin';
 
@@ -657,4 +658,109 @@ export const Footer10DataSource = {
       </span>
     ),
   },
+};
+export const UserNavDataSource = {
+  wrapper: { className: 'header home-page-wrapper ksyr20teb3-editor_css' },
+  page: { className: 'user-page' },
+  logo: {
+    className: 'header3-logo ksyqidpda1n-editor_css',
+    children: 'https://i.imgur.com/b30AEJI.png',
+  },
+  Menu: {
+    className: 'header3-menu',
+    children: [
+      {
+        name: 'item0',
+        className: 'header3-item',
+        children: {
+          href: '#',
+          children: [
+            {
+              children: (
+                <span>
+                  <span>
+                    Username
+                  </span>
+                </span>
+              ),
+              name: 'text',
+            },
+          ],
+        },
+        subItem: [
+          {
+            name: 'sub0',
+            className: 'item-sub',
+            children: {
+              className: 'item-sub-item',
+              children: [
+                {
+                  name: 'image0',
+                  className: 'item-image',
+                  children:
+                    'https://i.imgur.com/EcV4H0Z.png',
+                },
+                {
+                  name: 'title',
+                  className: 'item-title',
+                  children: 'Account',
+                },
+                {
+                  name: 'content',
+                  className: 'item-content',
+                  children: 'Your account'
+                },
+              ],
+            },
+          },
+          {
+            name: 'sub1',
+            className: 'item-sub',
+            children: {
+              className: 'item-sub-item',
+              children: [
+                {
+                  name: 'image0',
+                  className: 'item-image',
+                  children:
+                    'https://i.imgur.com/aOxB7Dw.png',
+                },
+                {
+                  name: 'title',
+                  className: 'item-title',
+                  children: 'Options',
+                },
+                {
+                  name: 'content',
+                  className: 'item-content',
+                  children: 'Yours settings',
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        name: 'item3',
+        className: 'header3-item',
+        children: {
+          href: '#',
+          children: [
+            {
+              children: (
+                <span>
+                  <p>
+                    <Button>LogOut</Button>
+                  </p>
+                </span>
+              ),
+              name: 'text',
+              className: 'ksys1i6iwyj-editor_css',
+            },
+          ],
+        },
+      },
+    ],
+  },
+  mobileMenu: { className: 'header3-mobile-menu' },
 };

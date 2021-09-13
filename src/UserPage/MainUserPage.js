@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { enquireScreen } from 'enquire-js';
+import Footer from '../Home/Footer1';
+import Header from '../Home/Nav3'
+
+import { Footer10DataSource, UserNavDataSource } from '../Home/data.source.js'
 
 
 let isMobile;
@@ -15,12 +19,11 @@ class MainUserPage extends Component {
       };
     }
     render (){
-      console.log("test")
       return(
         <div>
-          <header>
-            <p>Some text</p>
-          </header>
+          <Header dataSource={UserNavDataSource} isMobile={this.isMobile} />
+          <p>COS TU MA BYC</p>
+          <Footer dataSource={Footer10DataSource} isMobile={this.isMobile}/>
         </div>
       )
     }
