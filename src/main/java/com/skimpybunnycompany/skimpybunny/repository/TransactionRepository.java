@@ -3,6 +3,7 @@ package com.skimpybunnycompany.skimpybunny.repository;
 import com.skimpybunnycompany.skimpybunny.domain.Transaction;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -134,4 +135,6 @@ public interface TransactionRepository extends PagingAndSortingRepository<Transa
     List<Transaction> getDistinctContractorByUserLogin(String userLogin);
 
     void deleteById(String transactionID);
+
+    Optional<Transaction> getByTransactionID(String transactionID);
 }

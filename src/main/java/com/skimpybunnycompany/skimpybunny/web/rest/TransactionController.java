@@ -44,8 +44,7 @@ public class TransactionController {
     @ApiOperation(
         value = "getAllTransactions",
         notes = "Get list of transactions that match criteria query",
-        response = TransactionsResponseSchema.class,
-        tags = "transactions-resource"
+        response = TransactionsResponseSchema.class
     )
     @ApiResponses(
         value = {
@@ -115,8 +114,18 @@ public class TransactionController {
     // TODO: /transactions/{user}/{transaction_id} - PATCH, DELETE, GET
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> getTransaction(@PathVariable String id) {
+    public ResponseEntity<String> deleteTransaction(@PathVariable String id) {
         return new ResponseEntity<>(transactionService.deleteTransaction(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TransactionResponse> getTransaction(@PathVariable String id) {
+        Optional<TransactionResponse> returnedTransactionResponse = transactionService.getTransaction(id);
+        if (returnedTransactionResponse.isPresent()) {
+            return new ResponseEntity<>(returnedTransactionResponse.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/")

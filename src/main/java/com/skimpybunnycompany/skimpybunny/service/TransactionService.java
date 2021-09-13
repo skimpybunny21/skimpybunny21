@@ -288,4 +288,13 @@ public class TransactionService {
         transactionRepository.deleteById(transactionID);
         return "Transaction has been deleted successfully";
     }
+
+    public Optional<TransactionResponse> getTransaction(String transactionID) {
+        Optional<Transaction> returnedTransaction = transactionRepository.getByTransactionID(transactionID);
+        if (returnedTransaction.isPresent()) {
+            return Optional.of(new TransactionResponse(returnedTransaction.get()));
+        } else {
+            return Optional.empty();
+        }
+    }
 }
