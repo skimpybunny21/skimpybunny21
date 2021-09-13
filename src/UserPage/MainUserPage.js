@@ -5,6 +5,8 @@ import Header from '../Home/Nav3'
 import Chart1 from './chart1';
 
 import { Footer10DataSource, UserNavDataSource } from '../Home/data.source.js'
+import userCalendar from './userCalendar';
+import Chart2 from './chart2';
 
 
 let isMobile;
@@ -23,7 +25,15 @@ class MainUserPage extends Component {
       return(
         <div>
           <Header dataSource={UserNavDataSource} isMobile={this.isMobile} />
-          <Chart1></Chart1>
+          <div style={{float: 'left'}}>
+            <Chart1></Chart1>
+          </div>
+          <div style={{float: 'right'}}>
+            <userCalendar></userCalendar>
+          </div>
+          <div style={{height: 500}}>
+            <Chart2></Chart2>
+          </div>
           <Footer dataSource={Footer10DataSource} isMobile={this.isMobile}/>
         </div>
       )
