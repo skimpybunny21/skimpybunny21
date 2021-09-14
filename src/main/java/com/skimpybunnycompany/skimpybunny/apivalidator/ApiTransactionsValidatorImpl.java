@@ -1,7 +1,6 @@
-package com.skimpybunnycompany.skimpybunny.api_validator;
+package com.skimpybunnycompany.skimpybunny.apivalidator;
 
 import com.skimpybunnycompany.skimpybunny.exception.ApiRequestException;
-import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import com.skimpybunnycompany.skimpybunny.security.SecurityUtils;
 import java.time.DateTimeException;
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.skimpybunnycompany.skimpybunny.web.rest;
 
-import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidator;
+import com.skimpybunnycompany.skimpybunny.apivalidator.ApiTransactionsValidator;
 import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import com.skimpybunnycompany.skimpybunny.response.TransactionResponse;
 import com.skimpybunnycompany.skimpybunny.response.TransactionsResponseSchema;
@@ -110,8 +110,6 @@ public class TransactionController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    // TODO: /transactions/{user}/{transaction_id} - PATCH, DELETE, GET
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTransaction(@PathVariable String id) {

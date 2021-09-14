@@ -1,6 +1,6 @@
 package com.skimpybunnycompany.skimpybunny.service;
 
-import com.skimpybunnycompany.skimpybunny.api_validator.ApiTransactionsValidator;
+import com.skimpybunnycompany.skimpybunny.apivalidator.ApiTransactionsValidator;
 import com.skimpybunnycompany.skimpybunny.domain.Transaction;
 import com.skimpybunnycompany.skimpybunny.domain.User;
 import com.skimpybunnycompany.skimpybunny.repository.TransactionInsertRepository;
@@ -10,14 +10,10 @@ import com.skimpybunnycompany.skimpybunny.request.TransactionRequest;
 import com.skimpybunnycompany.skimpybunny.response.TransactionResponse;
 import java.time.LocalDate;
 import java.util.*;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
