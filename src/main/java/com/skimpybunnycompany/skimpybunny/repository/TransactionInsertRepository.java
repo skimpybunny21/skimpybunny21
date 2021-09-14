@@ -38,4 +38,27 @@ public class TransactionInsertRepository {
             .setParameter(8, newTransaction.getContractor())
             .executeUpdate();
     }
+
+    @Transactional
+    public int updateTransaction(Transaction newTransaction) {
+        return entityManager
+            .createNativeQuery(
+                "UPDATE app_db.transactions SET " +
+                "name = ?," +
+                "amount = ?," +
+                "transaction_date = ?, " +
+                "is_active = ?," +
+                "category = ?, " +
+                "contractor = ? " +
+                "WHERE transaction_id = ?"
+            )
+            .setParameter(1, newTransaction.getName())
+            .setParameter(2, newTransaction.getAmount())
+            .setParameter(3, newTransaction.getTransactionDate())
+            .setParameter(4, newTransaction.getActive())
+            .setParameter(5, newTransaction.getCategory())
+            .setParameter(6, newTransaction.getContractor())
+            .setParameter(7, newTransaction.getTransactionID())
+            .executeUpdate();
+    }
 }

@@ -14,6 +14,9 @@ import lombok.Setter;
 @Setter
 public class TransactionRequest {
 
+    @JsonProperty("transaction_id")
+    private String transactionID;
+
     @JsonProperty("name")
     @NotBlank(message = "Transaction name is required")
     private String name;
@@ -79,5 +82,13 @@ public class TransactionRequest {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(String transactionID) {
+        this.transactionID = transactionID;
     }
 }

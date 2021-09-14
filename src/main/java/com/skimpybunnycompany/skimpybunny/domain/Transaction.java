@@ -62,7 +62,8 @@ public class Transaction {
     public Transaction() {}
 
     public Transaction(TransactionRequest transactionRequest) {
-        this.transactionID = UUID.randomUUID().toString();
+        this.transactionID =
+            transactionRequest.getTransactionID() == null ? UUID.randomUUID().toString() : transactionRequest.getTransactionID();
         this.name = transactionRequest.getName();
         this.amount = transactionRequest.getAmount();
         this.transactionDate = transactionRequest.getTransactionDate();

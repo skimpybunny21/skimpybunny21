@@ -284,6 +284,17 @@ public class TransactionService {
         return insertedTransactionResponse;
     }
 
+    public Optional<TransactionResponse> patchTransaction(TransactionRequest transactionRequest) {
+        Optional<TransactionResponse> patchedTransaction = null;
+        Transaction patchTransaction = new Transaction(transactionRequest);
+        if (1 == transactionInsertRepository.updateTransaction(patchTransaction)) {
+            patchedTransaction = Optional.of(new TransactionResponse(patchTransaction));
+        } else {
+            patchedTransaction = Optional.empty();
+        }
+        return patchedTransaction;
+    }
+
     public String deleteTransaction(String transactionID) {
         transactionRepository.deleteById(transactionID);
         return "Transaction has been deleted successfully";

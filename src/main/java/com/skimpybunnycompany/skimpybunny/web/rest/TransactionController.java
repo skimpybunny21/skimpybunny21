@@ -124,7 +124,19 @@ public class TransactionController {
         if (returnedTransactionResponse.isPresent()) {
             return new ResponseEntity<>(returnedTransactionResponse.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PatchMapping("/")
+    public ResponseEntity<TransactionResponse> patchTransaction(
+        @Valid @RequestBody(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") TransactionRequest transactionRequest
+    ) {
+        Optional<TransactionResponse> transactionResponse = transactionService.patchTransaction(transactionRequest);
+        if (transactionResponse.isPresent()) {
+            return new ResponseEntity<>(transactionResponse.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
