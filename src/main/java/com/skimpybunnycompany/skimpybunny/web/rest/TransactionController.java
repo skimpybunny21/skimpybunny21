@@ -58,10 +58,10 @@ public class TransactionController {
     )
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllTransactions(
-        @ApiParam(value = "i.e. '0'  - page number of returned list of transactions. Default: '0' - first page") @RequestParam(
+        @ApiParam(value = "i.e. '0'  - page number of returned list of transactions. " + "Default: '0' - first page") @RequestParam(
             defaultValue = "0"
         ) int page,
-        @ApiParam(value = "i.e. '20' - page number of returned list of transactions. Default: '30' transactions.'") @RequestParam(
+        @ApiParam(value = "i.e. '20' - page number of returned list of transactions. " + "Default: '30' transactions.'") @RequestParam(
             defaultValue = "30"
         ) int size,
         @ApiParam(value = "default 'transactionDate' - name of column by which to sort the table") @RequestParam(
