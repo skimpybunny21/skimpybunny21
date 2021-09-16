@@ -1,3 +1,0 @@
-stworzyć enumy (do pól w bazie tabeli application settings:
-// TODO: Languages, Currencies, TimeZones, Themes
-
