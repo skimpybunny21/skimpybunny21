@@ -46,7 +46,11 @@ const LoginForm = () => {
   };
 
   if (localStorage.getItem('loginId')) {
-    return null;
+    return (      
+    <Row>
+      <Col span="8"></Col>
+      <Col span="8"><p>Already logged in!</p></Col>
+    </Row>);
   }
 
   const errorAlert = error ? <Row>

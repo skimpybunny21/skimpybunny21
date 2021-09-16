@@ -1,5 +1,6 @@
 import { Button } from 'antd';
-import React, { Component } from 'react';
+import React from 'react';
+import Logout from '../Components/LogOut';
 import Popup from '../Components/ModalLogin';
 
 
@@ -750,7 +751,7 @@ export const UserNavDataSource = {
               children: (
                 <span>
                   <p>
-                    <Button>LogOut</Button>
+                    <Button onClick={() => Logout} >LogOut</Button>
                   </p>
                 </span>
               ),
