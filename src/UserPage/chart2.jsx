@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Column } from '@ant-design/charts';
+import { Pie } from '@ant-design/charts';
 
 const Chart2 = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    asyncFetch();
+    Fetch();
   }, []);
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/antfincdn/iPY8JFnxdb/dodge-padding.json')
+  const Fetch = () => {
+    fetch('data2.json'
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }
+    )
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => {
@@ -15,23 +22,18 @@ const Chart2 = () => {
       });
   };
   var config = {
+    appendPadding: 10,
     data: data,
-    isGroup: true,
-    xField: 'test',
-    yField: 'testyy',
-    seriesField: 'name',
-    dodgePadding: 2,
-    intervalPadding: 20,
+    angleField: 'value',
+    colorField: 'type',
+    radius: 0.8,
     label: {
-      position: 'middle',
-      layout: [
-        { type: 'interval-adjust-position' },
-        { type: 'interval-hide-overlap' },
-        { type: 'adjust-color' },
-      ],
+      type: 'outer',
+      content: '{name} {percentage}',
     },
+    interactions: [{ type: 'pie-legend-active' }, { type: 'element-active' }],
   };
-  return <Column {...config} />;
+  return <Pie {...config} />;
 };
 
 export default Chart2;
