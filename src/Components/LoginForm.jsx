@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { OktaAuth } from '@okta/okta-auth-js';
-import { useOktaAuth } from '@okta/okta-react';
 
 import { Form, Input, Button, Alert, Row, Col } from 'antd';
 
@@ -19,10 +18,14 @@ const LoginForm = () => {
     const oktaAuth2 = new OktaAuth({ url: baseDomain, issuer: issuer });
     oktaAuth2
     .signInWithCredentials({ username, password })
-      .then(res => { setSessionToken(res.sessionToken); console.log(res)})
+      .then(res => { handleSessionToken(res);})
         .catch(err => setError(err));
-    
-      console.log(JSON.stringify(sessionToken));
+  };
+
+  const handleSessionToken = (res) => {
+    setSessionToken(res.sessionToken);
+      const userId = res.user.id;
+      localStorage.setItem('loginId', userId);
   };
 
   const layout = {
@@ -42,7 +45,7 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  if (sessionToken) {
+  if (localStorage.getItem('loginId')) {
     return null;
   }
 

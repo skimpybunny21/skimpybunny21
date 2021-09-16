@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import reactDom from 'react-dom';
 import { enquireScreen } from 'enquire-js';
 import Footer from '../Home/Footer1';
 import Header from '../Home/Nav3'

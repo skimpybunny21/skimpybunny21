@@ -16,7 +16,7 @@ const Chart2 = () => {
     }
     )
       .then((response) => response.json())
-      .then((json) => setData(json))
+      .then((json) => setData(json))  //json.transactions(lista tranzakcji).foreachdla konkretnych elementow
       .catch((error) => {
         console.log('fetch data failed', error);
       });
