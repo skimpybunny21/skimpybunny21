@@ -1,3 +1,6 @@
 package com.skimpybunnycompany.skimpybunny.enums;
 
-public class ThemeName {}
+public enum ThemeName {
+    DEFAULT,
+    BLACK,
+}
