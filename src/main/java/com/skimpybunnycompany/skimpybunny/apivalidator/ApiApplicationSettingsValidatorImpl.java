@@ -20,17 +20,17 @@ public class ApiApplicationSettingsValidatorImpl implements ApiApplicationSettin
     }
 
     private void checkValidThemeName(String requestThemeName) {
-        if (!EnumUtils.isValidEnum(LanguageName.class, requestThemeName)) {
+        if (!EnumUtils.isValidEnum(ThemeName.class, requestThemeName)) {
             throw new ApiRequestException(
-                requestThemeName + "isn't valid for value of ThemeName. Possible options are: " + ThemeName.values()
+                requestThemeName + " isn't valid for value of ThemeName. Possible options are: " + ThemeName.values().toString()
             );
         }
     }
 
     private void checkValidCurrencyName(String requestCurrencyName) {
-        if (!EnumUtils.isValidEnum(LanguageName.class, requestCurrencyName)) {
+        if (!EnumUtils.isValidEnum(CurrencyName.class, requestCurrencyName)) {
             throw new ApiRequestException(
-                requestCurrencyName + "isn't valid for value of CurrencyName. Possible options are: " + CurrencyName.values()
+                requestCurrencyName + " isn't valid for value of CurrencyName. Possible options are: " + CurrencyName.values().toString()
             );
         }
     }
@@ -38,7 +38,7 @@ public class ApiApplicationSettingsValidatorImpl implements ApiApplicationSettin
     private void checkValidLanguageName(String requestLanguageName) {
         if (!EnumUtils.isValidEnum(LanguageName.class, requestLanguageName)) {
             throw new ApiRequestException(
-                requestLanguageName + "isn't valid for value of LanguageName. Possible options are: " + LanguageName.values()
+                requestLanguageName + " isn't valid for value of LanguageName. Possible options are: " + LanguageName.values().toString()
             );
         }
     }

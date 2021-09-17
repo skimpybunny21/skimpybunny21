@@ -18,7 +18,51 @@ public class ApplicationSettingsRequest {
     private String currencyName;
 
     @JsonProperty("colour_scheme")
+    private String colourName;
+
+    @JsonProperty("is_active_email_raport")
+    private Boolean isActiveEmailRaport;
+
+    @JsonProperty("is_paid_subscription")
+    private Boolean isPaidSubscription;
+
+    @JsonProperty("is_notification_active")
+    private Boolean isNotificationActive;
+
+    @JsonProperty("theme_name")
     private String themeName;
+
+    public String getColourName() {
+        return colourName;
+    }
+
+    public void setColourName(String colourName) {
+        this.colourName = colourName;
+    }
+
+    public Boolean isActiveEmailRaport() {
+        return isActiveEmailRaport;
+    }
+
+    public void setActiveEmailRaport(boolean activeEmailRaport) {
+        isActiveEmailRaport = activeEmailRaport;
+    }
+
+    public Boolean getIsPaidSubscription() {
+        return isPaidSubscription;
+    }
+
+    public void setIsPaidSubscription(Boolean isPaidSubscription) {
+        this.isPaidSubscription = isPaidSubscription;
+    }
+
+    public boolean getIsNotificationActive() {
+        return isNotificationActive;
+    }
+
+    public void setIsNotificationActive(Boolean isNotificationActive) {
+        this.isNotificationActive = isNotificationActive;
+    }
 
     public String getLanguageName() {
         return languageName;

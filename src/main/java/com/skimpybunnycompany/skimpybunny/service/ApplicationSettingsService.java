@@ -3,6 +3,7 @@ package com.skimpybunnycompany.skimpybunny.service;
 import com.skimpybunnycompany.skimpybunny.domain.ApplicationSettings;
 import com.skimpybunnycompany.skimpybunny.repository.ApplicationSettingsRepository;
 import com.skimpybunnycompany.skimpybunny.repository.UserRepository;
+import com.skimpybunnycompany.skimpybunny.request.ApplicationSettingsRequest;
 import com.skimpybunnycompany.skimpybunny.response.ApplicationSettingsResponse;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,28 @@ public class ApplicationSettingsService {
         ApplicationSettings userApplicationSettings = applicationSettingsRepository.save(maybeUserApplicationSettings.get());
 
         return Optional.of(new ApplicationSettingsResponse(userApplicationSettings));
+    }
+
+    public Optional<ApplicationSettingsResponse> patchApplicationSettings(
+        ApplicationSettingsRequest applicationSettingsRequest,
+        String currentUserLogin
+    ) {
+        ApplicationSettings applicationSettings = new ApplicationSettings(applicationSettingsRequest);
+        prepareApplicationSettingsToUpdate(applicationSettings, currentUserLogin);
+        ApplicationSettings userApplicationSettings = applicationSettingsRepository.save(applicationSettings);
+
+        return Optional.of(new ApplicationSettingsResponse(userApplicationSettings));
+    }
+
+    private void prepareApplicationSettingsToUpdate(ApplicationSettings applicationSettings, String currentUserLogin) {
+        applicationSettings.setUserID(userRepository.findOneByLogin(currentUserLogin).get().getId());
+
+        if (applicationSettings.getColourScheme() == null) {
+            applicationSettings.setColourScheme("default");
+        }
+
+        if (applicationSettings.getTimeZoneName() == null) {
+            applicationSettings.setTimeZoneName("default");
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.skimpybunnycompany.skimpybunny.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.skimpybunnycompany.skimpybunny.request.ApplicationSettingsRequest;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
@@ -88,6 +89,16 @@ public class ApplicationSettings {
         this.isNotificationActive = isNotificationActive;
         this.isActiveEmailRaport = isActiveEmailRaport;
         this.isPaidSubscription = isPaidSubscription;
+    }
+
+    public ApplicationSettings(ApplicationSettingsRequest ar) {
+        this.colourScheme = ar.getColourName();
+        this.languageName = ar.getLanguageName();
+        this.currencyName = ar.getCurrencyName();
+        this.themeName = ar.getThemeName();
+        this.isActiveEmailRaport = ar.isActiveEmailRaport();
+        this.isNotificationActive = ar.getIsNotificationActive();
+        this.isPaidSubscription = ar.getIsPaidSubscription();
     }
 
     public static ApplicationSettings returnDefaultApplicationSettings() {

@@ -1,8 +1,5 @@
 package com.skimpybunnycompany.skimpybunny.response;
 
-import static tech.jhipster.config.JHipsterDefaults.ApiDocs.description;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skimpybunnycompany.skimpybunny.domain.ApplicationSettings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,80 +14,80 @@ import lombok.ToString;
 public class ApplicationSettingsResponse {
 
     @ApiModelProperty(value = "Theme of page", position = 2, example = "WHITE, BLACK")
-    private String themeName;
+    private String theme_name;
 
     @ApiModelProperty(value = "Language of page", position = 3, example = "EN, PL")
-    private String languageName;
+    private String language_name;
 
     @ApiModelProperty(value = "Currency name for transactions", position = 4, example = "PLN, EUR, USD")
-    private String currencyName;
+    private String currency_name;
 
     @ApiModelProperty(value = "isNotificationActive", position = 4, example = "true or false")
-    private Boolean isNotificationActive;
+    private Boolean is_notification_active;
 
     @ApiModelProperty(value = "isActiveEmailRaport", position = 4, example = "true or false")
-    private Boolean isActiveEmailRaport;
+    private Boolean is_active_email_raport;
 
     @ApiModelProperty(value = "isPaidSubscription", position = 4, example = "true or false")
-    private Boolean isPaidSubscription;
+    private Boolean is_paid_subscription;
 
     public ApplicationSettingsResponse(ApplicationSettings as) {
-        this.themeName = as.getThemeName();
-        this.currencyName = as.getCurrencyName();
-        this.languageName = as.getLanguageName();
-        this.isNotificationActive = as.getNotificationActive();
-        this.isActiveEmailRaport = as.getActiveEmailRaport();
-        this.isPaidSubscription = as.getPaidSubscription();
+        this.theme_name = as.getThemeName();
+        this.currency_name = as.getCurrencyName();
+        this.language_name = as.getLanguageName();
+        this.is_notification_active = as.getNotificationActive();
+        this.is_active_email_raport = as.getActiveEmailRaport();
+        this.is_paid_subscription = as.getPaidSubscription();
     }
 
     public ApplicationSettingsResponse() {}
 
-    public Boolean getNotificationActive() {
-        return isNotificationActive;
+    public String getTheme_name() {
+        return theme_name;
     }
 
-    public void setNotificationActive(Boolean notificationActive) {
-        isNotificationActive = notificationActive;
+    public void setTheme_name(String theme_name) {
+        this.theme_name = theme_name;
     }
 
-    public Boolean getActiveEmailRaport() {
-        return isActiveEmailRaport;
+    public String getLanguage_name() {
+        return language_name;
     }
 
-    public void setActiveEmailRaport(Boolean activeEmailRaport) {
-        isActiveEmailRaport = activeEmailRaport;
+    public void setLanguage_name(String language_name) {
+        this.language_name = language_name;
     }
 
-    public Boolean getPaidSubscription() {
-        return isPaidSubscription;
+    public String getCurrency_name() {
+        return currency_name;
     }
 
-    public void setPaidSubscription(Boolean paidSubscription) {
-        isPaidSubscription = paidSubscription;
+    public void setCurrency_name(String currency_name) {
+        this.currency_name = currency_name;
     }
 
-    public String getThemeName() {
-        return themeName;
+    public Boolean getIs_notification_active() {
+        return is_notification_active;
     }
 
-    public void setThemeName(String themeName) {
-        this.themeName = themeName;
+    public void setIs_notification_active(Boolean is_notification_active) {
+        this.is_notification_active = is_notification_active;
     }
 
-    public String getLanguageName() {
-        return languageName;
+    public Boolean getIs_active_email_raport() {
+        return is_active_email_raport;
     }
 
-    public void setLanguageName(String languageName) {
-        this.languageName = languageName;
+    public void setIs_active_email_raport(Boolean is_active_email_raport) {
+        this.is_active_email_raport = is_active_email_raport;
     }
 
-    public String getCurrencyName() {
-        return currencyName;
+    public Boolean getIs_paid_subscription() {
+        return is_paid_subscription;
     }
 
-    public void setCurrencyName(String currencyName) {
-        this.currencyName = currencyName;
+    public void setIs_paid_subscription(Boolean is_paid_subscription) {
+        this.is_paid_subscription = is_paid_subscription;
     }
 
     @Override
@@ -98,20 +95,20 @@ public class ApplicationSettingsResponse {
         return (
             "ApplicationSettingsResponse{" +
             "themeName='" +
-            themeName +
+            theme_name +
             '\'' +
             ", languageName='" +
-            languageName +
+            language_name +
             '\'' +
             ", currencyName='" +
-            currencyName +
+            currency_name +
             '\'' +
             ", isNotificationActive=" +
-            isNotificationActive +
+            is_notification_active +
             ", isActiveEmailRaport=" +
-            isActiveEmailRaport +
+            is_active_email_raport +
             ", isPaidSubscription=" +
-            isPaidSubscription +
+            is_paid_subscription +
             '}'
         );
     }
