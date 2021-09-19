@@ -751,7 +751,7 @@ export const UserNavDataSource = {
               children: (
                 <span>
                   <p>
-                    <Button onClick={() => Logout} >LogOut</Button>
+                    <Button onClick={Logout} >LogOut</Button>
                   </p>
                 </span>
               ),
