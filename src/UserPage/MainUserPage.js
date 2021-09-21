@@ -5,7 +5,7 @@ import Header from '../Home/Nav3'
 import Chart1 from './chart1';
 
 import { Footer10DataSource, UserNavDataSource } from '../Home/data.source.js'
-import userCalendar from './userCalendar';
+import UserCalendar from './userCalendar';
 import Chart2 from './chart2';
 
 
@@ -27,6 +27,9 @@ class MainUserPage extends Component {
           <Header dataSource={UserNavDataSource} isMobile={this.isMobile} />
           <div>
             <Chart1 isMobile={this.isMobile}></Chart1>
+          </div>
+          <div>
+            <UserCalendar isMobile={this.isMobile}></UserCalendar>
           </div>
           <div>
             <Chart2 isMobile={this.isMobile}></Chart2>
