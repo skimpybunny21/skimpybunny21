@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { useHistory } from "react-router-dom";
 
 import { Form, Input, Button, Alert, Row, Col } from 'antd';
 
@@ -11,6 +12,7 @@ const LoginForm = () => {
   const [error, setError] = useState();
   const baseDomain = "https://dev-58368863.okta.com/";
   const issuer = baseDomain + '/oauth2/default'
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,8 @@ const LoginForm = () => {
     .signInWithCredentials({ username, password })
       .then(res => { handleSessionToken(res);})
         .catch(err => setError(err));
+    
+    history.push("/userpage")
   };
 
   const handleSessionToken = (res) => {
