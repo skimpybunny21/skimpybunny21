@@ -7,7 +7,7 @@ import { DownOutlined, UserOutlined } from '@ant-design/icons';
 const UserAccountSettings = () => {
     const [visible, setVisible] = React.useState(false);
     const [confirmLoading, setConfirmLoading] = React.useState(false);
-    const [modalText, setModalText] = React.useState('Content of the modal');
+    const setModalText = React.useState('Content of the modal');
 
     const showModal = () => {
         setVisible(true);
@@ -52,7 +52,7 @@ const UserAccountSettings = () => {
             Settings
         </Button>
         <Modal
-            title="Title"
+            title="Settings"
             visible={visible}
             onOk={handleOk}
             confirmLoading={confirmLoading}
@@ -96,8 +96,6 @@ const UserAccountSettings = () => {
                 <Checkbox>Dark mode</Checkbox>
             </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            </Form.Item>
             </Form>
         </p>
         </Modal>
