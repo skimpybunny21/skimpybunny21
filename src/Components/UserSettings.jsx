@@ -32,7 +32,7 @@ const UserAccountSettings = () => {
         console.log('click', e);
       }
 
-    const menu = (
+    const menu1 = (
         <Menu onClick={handleMenuClick}>
           <Menu.Item key="1" icon={<UserOutlined />}>
             Theme 1
@@ -45,6 +45,17 @@ const UserAccountSettings = () => {
           </Menu.Item>
         </Menu>
       );
+
+    const menu2 = (
+        <Menu onClick={handleMenuClick}>
+        <Menu.Item key="1" icon={<UserOutlined />}>
+          English
+        </Menu.Item>
+        <Menu.Item key="2" icon={<UserOutlined />}>
+          Polish
+        </Menu.Item>
+      </Menu>
+    );
 
     return (
         <>
@@ -84,8 +95,16 @@ const UserAccountSettings = () => {
                 <Input.Password />
             </Form.Item>
 
+            <Form.Item name="languageSelector" valuePropName="language" wrapperCol={{ offset: 8, span: 16 }}>
+                <Dropdown overlay={menu2}>
+                    <Button>
+                        Language <DownOutlined />
+                    </Button>
+                </Dropdown>
+            </Form.Item>
+
             <Form.Item name="themeChenge" valuePropName="theme" wrapperCol={{ offset: 8, span: 16 }}>
-                <Dropdown overlay={menu}>
+                <Dropdown overlay={menu1}>
                     <Button>
                         Theme <DownOutlined />
                     </Button>
