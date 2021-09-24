@@ -11,16 +11,16 @@ const UserAccountModal = () => {
     };
 
     const handleOk = () => {
-        setModalText('The modal will be closed after two seconds');
+        setModalText('Saving');
         setConfirmLoading(true);
         setTimeout(() => {
         setVisible(false);
         setConfirmLoading(false);
-        }, 2000);
+        }, 1000);
     };
 
     const handleCancel = () => {
-        console.log('Clicked cancel button');
+        console.log('Cancel');
         setVisible(false);
     };
 
