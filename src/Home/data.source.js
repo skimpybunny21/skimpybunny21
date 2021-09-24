@@ -1,6 +1,7 @@
 import React from 'react';
 import Logout from '../Components/LogOut';
 import Popup from '../Components/ModalLogin';
+import RegistrationForm from '../Components/RegistrationForm';
 
 
 
@@ -115,7 +116,9 @@ export const Nav30DataSource = {
               children: (
                 <span>
                   <span>
-                    <p>Plans</p>
+                    <p>
+                      <RegistrationForm></RegistrationForm>
+                    </p>
                   </span>
                 </span>
               ),
