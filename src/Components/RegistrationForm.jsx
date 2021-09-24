@@ -4,7 +4,8 @@ import { Button } from 'antd';
 const RegistrationForm = () => {
 
     const handleButtonClick = () => {
-        window.location.replace('https://dev-58368863.okta.com/signin/register')
+        //window.location.replace('https://dev-58368863.okta.com/signin/register')
+        window.open('https://dev-58368863.okta.com/signin/register')
         console.log("Wokring!");
     }
 
