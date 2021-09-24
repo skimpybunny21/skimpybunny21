@@ -2,6 +2,8 @@ import React from 'react';
 import Logout from '../Components/LogOut';
 import Popup from '../Components/ModalLogin';
 import RegistrationForm from '../Components/RegistrationForm';
+import UserAccountModal from '../Components/UserAccount';
+import UserAccountSettings from '../Components/UserSettings';
 
 
 
@@ -706,12 +708,7 @@ export const UserNavDataSource = {
                 {
                   name: 'title',
                   className: 'item-title',
-                  children: 'Account',
-                },
-                {
-                  name: 'content',
-                  className: 'item-content',
-                  children: 'Your account'
+                  children: <UserAccountModal></UserAccountModal>,
                 },
               ],
             },
@@ -731,12 +728,7 @@ export const UserNavDataSource = {
                 {
                   name: 'title',
                   className: 'item-title',
-                  children: 'Options',
-                },
-                {
-                  name: 'content',
-                  className: 'item-content',
-                  children: 'Yours settings',
+                  children: <UserAccountSettings></UserAccountSettings>,
                 },
               ],
             },
