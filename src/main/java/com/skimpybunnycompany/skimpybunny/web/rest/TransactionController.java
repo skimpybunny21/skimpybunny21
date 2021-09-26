@@ -78,11 +78,13 @@ public class TransactionController {
         @ApiParam(
             value = "'dates range' - optional dates range for transaction. " +
             "Accepted: lastWeekNextWeek, lastMonthNextMonth, lastMonthNext3Months or i.e. 2021-09-01,2021-12-01"
-        ) @RequestParam(required = false) String dates
+        ) @RequestParam(required = false) String dates,
+        @RequestParam(required = false) String userLogin
     ) {
         apiTransactionsValidator.checkValidClientRequestGetTransactions(name, size, sort, direction, category, contractor, dates);
 
-        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+        //        String currentUserLogin = SecurityUtils.getCurrentUserLogin().get();
+        String currentUserLogin = userLogin != null ? userLogin : SecurityUtils.getCurrentUserLogin().get();
         String sortColumn = sort;
         Sort.Direction sortDirection = direction.toLowerCase().equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Sort sortBy = Sort.by(sortDirection, sortColumn);
@@ -141,7 +143,7 @@ public class TransactionController {
     @PostMapping("/")
     public ResponseEntity<TransactionResponse> createTransaction(
         @Valid @RequestBody(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") TransactionRequest transactionRequest,
-        @RequestParam String userLogin
+        @RequestParam(required = false) String userLogin
     ) {
         String transactionUserLogin = userLogin != null ? userLogin : SecurityUtils.getCurrentUserLogin().get();
         Optional<TransactionResponse> transactionResponse = transactionService.createTransaction(transactionRequest, transactionUserLogin);
