@@ -8,6 +8,7 @@ const Logout = () => {
 
     const handleClick = () => {
         localStorage.removeItem('loginId');
+        localStorage.removeItem('sToken')
         history.push("/");
         console.log("User logged out!")
     }
