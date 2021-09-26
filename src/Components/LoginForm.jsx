@@ -29,8 +29,10 @@ const LoginForm = () => {
 
   const handleSessionToken = (res) => {
     setSessionToken(res.sessionToken);
+    console.log(res);
       const userId = res.user.id;
       const sToken = res.sessionToken;
+      console.log(sToken);
       localStorage.setItem('loginId', userId);
       localStorage.setItem('sToken', sToken);
   };
