@@ -14,3 +14,5 @@ React, JavaScript, AntD, HTML, CSS
 Za część backendową odpowiada: Roman Pindela
 Za część frontendową odpowiada: Michał Sendek
 
+
+Heroku, Docker - plan
