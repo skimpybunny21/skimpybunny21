@@ -9,7 +9,8 @@ Swagger,
 Okta, oAuth,
 jHipster
 Flyway, PostgreSQL
-React, JavaScript, AntD
+React, JavaScript, AntD, HTML, CSS
 
 Za część backendową odpowiada: Roman Pindela
 Za część frontendową odpowiada: Michał Sendek
+
